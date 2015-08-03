@@ -112,6 +112,19 @@ Tim Berners-Lee
 \clearpage % Start a new page
 
 %----------------------------------------------------------------------------------------
+%	ACKNOWLEDGEMENTS
+%----------------------------------------------------------------------------------------
+
+\setstretch{1.3} % Reset the line-spacing to 1.3 for body text (if it has changed)
+
+\acknowledgements{\addtocontents{toc}{\vspace{1em}} % Add a gap in the Contents, for aesthetics
+
+This master thesis was done in the context of the double master degree Informatique - Information und Kommunikation (IFIK), which brings together two Master programs : a degree in computer engineering at the National Institute of Applied Sciences in Lyon (INSA Lyon) and a Master in Informatik (Schwerpunkt : Information und Kommunikationssysteme) at the University of Passau.\\
+
+}
+\clearpage % Start a new page
+
+%----------------------------------------------------------------------------------------
 %	ABSTRACT PAGE
 %----------------------------------------------------------------------------------------
 
@@ -122,18 +135,6 @@ Tim Berners-Lee
 The Thesis Abstract is written here (and usually kept to just this page). The page is kept centered vertically so can expand into the blank space above the title too\ldots
 }
 
-\clearpage % Start a new page
-
-%----------------------------------------------------------------------------------------
-%	ACKNOWLEDGEMENTS
-%----------------------------------------------------------------------------------------
-
-\setstretch{1.3} % Reset the line-spacing to 1.3 for body text (if it has changed)
-
-\acknowledgements{\addtocontents{toc}{\vspace{1em}} % Add a gap in the Contents, for aesthetics
-
-The acknowledgements and the people to thank go here, don't forget to include your project advisor\ldots
-}
 \clearpage % Start a new page
 
 %----------------------------------------------------------------------------------------
@@ -167,52 +168,6 @@ The acknowledgements and the people to thank go here, don't forget to include yo
 }
 
 %----------------------------------------------------------------------------------------
-%	PHYSICAL CONSTANTS/OTHER DEFINITIONS
-%----------------------------------------------------------------------------------------
-
-\clearpage % Start a new page
-
-\lhead{\emph{Physical Constants}} % Set the left side page header to "Physical Constants"
-
-\listofconstants{lrcl} % Include a list of Physical Constants (a four column table)
-{
-Speed of Light & $c$ & $=$ & $2.997\ 924\ 58\times10^{8}\ \mbox{ms}^{-\mbox{s}}$ (exact)\\
-% Constant Name & Symbol & = & Constant Value (with units) \\
-}
-
-%----------------------------------------------------------------------------------------
-%	SYMBOLS
-%----------------------------------------------------------------------------------------
-
-\clearpage % Start a new page
-
-\lhead{\emph{Symbols}} % Set the left side page header to "Symbols"
-
-\listofnomenclature{lll} % Include a list of Symbols (a three column table)
-{
-$a$ & distance & m \\
-$P$ & power & W (Js$^{-1}$) \\
-% Symbol & Name & Unit \\
-
-& & \\ % Gap to separate the Roman symbols from the Greek
-
-$\omega$ & angular frequency & rads$^{-1}$ \\
-% Symbol & Name & Unit \\
-}
-
-%----------------------------------------------------------------------------------------
-%	DEDICATION
-%----------------------------------------------------------------------------------------
-
-\setstretch{1.3} % Return the line spacing back to 1.3
-
-\pagestyle{empty} % Page style needs to be empty for this page
-
-\dedicatory{For/Dedicated to/To my\ldots} % Dedication text
-
-\addtocontents{toc}{\vspace{2em}} % Add a gap in the Contents, for aesthetics
-
-%----------------------------------------------------------------------------------------
 %	THESIS CONTENT - CHAPTERS
 %----------------------------------------------------------------------------------------
 
@@ -223,14 +178,19 @@ $\omega$ & angular frequency & rads$^{-1}$ \\
 % Include the chapters of the thesis as separate files from the Chapters folder
 % Uncomment the lines as you write the chapters
 
-\input{Chapters/Chapter1}
-%\input{Chapters/Chapter2} 
-%\input{Chapters/Chapter3}
-%\input{Chapters/Chapter4} 
-%\input{Chapters/Chapter5} 
-%\input{Chapters/Chapter6} 
-%\input{Chapters/Chapter7} 
-
+% \input{Chapters/Chapter1}
+\input{Chapters/Introduction}
+\part{State of the Art}
+\input{Chapters/SemanticResources}
+\input{Chapters/Disambiguation}
+\input{Chapters/SimilarityMeasures}
+\input{Chapters/ExistingServices}
+\input{Chapters/SotAConclusion}
+\part{Contribution}
+\input{Chapters/Methodology}
+\input{Chapters/Architecture}
+\input{Chapters/Experiments}
+\input{Chapters/ContributionConclusion}
 %----------------------------------------------------------------------------------------
 %	THESIS CONTENT - APPENDICES
 %----------------------------------------------------------------------------------------
