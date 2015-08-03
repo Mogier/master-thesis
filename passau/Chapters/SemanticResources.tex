@@ -10,7 +10,11 @@
 
 \section{DBpedia}
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam ultricies lacinia euismod. Nam tempus risus in dolor rhoncus in interdum enim tincidunt. Donec vel nunc neque. In condimentum ullamcorper quam non consequat. Fusce sagittis tempor feugiat. Fusce magna erat, molestie eu convallis ut, tempus sed arcu. Quisque molestie, ante a tincidunt ullamcorper, sapien enim dignissim lacus, in semper nibh erat lobortis purus. Integer dapibus ligula ac risus convallis pellentesque.
+DBpedia is a project originally launched by two German universities (Berlin and Leipzig) and backed by an important community. It explore and extract information from Wikipedia and then semantically format it. Each encyclopedic document has his own page filled with data store in RDF (Resource Description Framework) triplets.\\
+
+DBpedia's hierarchical organization is based on classes and categories. Classes have super-classes and sub-classes, the root element being \say{Thing}.\\
+
+As well as any RDF-structured dataset, DBpedia can be requesting with SPARQL (SPARQL Protocol and RDF Query Language) queries. We can also use online applications according to our needs. For example, DBpedia Spotlight detects DBpedia entities/classes in a text which can be really useful if we possess a description.
 
 %----------------------------------------------------------------------------------------
 %	SECTION 2
@@ -18,12 +22,16 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam ultricies lacin
 
 \section{GeoNames}
 
-Sed ullamcorper quam eu nisl interdum at interdum enim egestas. Aliquam placerat justo sed lectus lobortis ut porta nisl porttitor. Vestibulum mi dolor, lacinia molestie gravida at, tempus vitae ligula. Donec eget quam sapien, in viverra eros. Donec pellentesque justo a massa fringilla non vestibulum metus vestibulum. Vestibulum in orci quis felis tempor lacinia. Vivamus ornare ultrices facilisis. Ut hendrerit volutpat vulputate. Morbi condimentum venenatis augue, id porta ipsum vulputate in. Curabitur luctus tempus justo. Vestibulum risus lectus, adipiscing nec condimentum quis, condimentum nec nisl. Aliquam dictum sagittis velit sed iaculis. Morbi tristique augue sit amet nulla pulvinar id facilisis ligula mollis. Nam elit libero, tincidunt ut aliquam at, molestie in quam. Aenean rhoncus vehicula hendrerit.
+GeoNames is a geographical database which contains more than 6,5 million places. It's a collaborative tool : users can add data or edit the existing ones. GeoNames' data are link to other RDF resources (mainly DBpedia). \\
+
+Semantically speaking, each GeoNames' resource is link to an URI. This URI lead the user to an HTML page or to a RDF description. We can then write SPARQL queries using specific namespaces and request GeoNames. This resource is a key in our process, it will give us our first information about the picture given its GPS coordinates.
 
 \section{WordNet}
 
-Sed ullamcorper quam eu nisl interdum at interdum enim egestas. Aliquam placerat justo sed lectus lobortis ut porta nisl porttitor. Vestibulum mi dolor, lacinia molestie gravida at, tempus vitae ligula. Donec eget quam sapien, in viverra eros. Donec pellentesque justo a massa fringilla non vestibulum metus vestibulum. Vestibulum in orci quis felis tempor lacinia. Vivamus ornare ultrices facilisis. Ut hendrerit volutpat vulputate. Morbi condimentum venenatis augue, id porta ipsum vulputate in. Curabitur luctus tempus justo. Vestibulum risus lectus, adipiscing nec condimentum quis, condimentum nec nisl. Aliquam dictum sagittis velit sed iaculis. Morbi tristique augue sit amet nulla pulvinar id facilisis ligula mollis. Nam elit libero, tincidunt ut aliquam at, molestie in quam. Aenean rhoncus vehicula hendrerit.
+WordNet is a lexical database created by Priceton University. Its structure is based on the "synset" (synonym set), a set of words with the same meaning. If DBpedia's architecture uses classes, Wordnet use hyponyms and hyperonyms. The root element is "entity".\\
+
+This resource is useful if we are searching for entities (tsetse-fly, jaguar, ...) but it also contains more general concepts (vehicle, animal, ...). It also have interesting links, like meronyms ("HAS-PART" relation), holonyms (the opposite), synonyms or antonyms.
 
 \section{ImageNet}
 
-Sed ullamcorper quam eu nisl interdum at interdum enim egestas. Aliquam placerat justo sed lectus lobortis ut porta nisl porttitor. Vestibulum mi dolor, lacinia molestie gravida at, tempus vitae ligula. Donec eget quam sapien, in viverra eros. Donec pellentesque justo a massa fringilla non vestibulum metus vestibulum. Vestibulum in orci quis felis tempor lacinia. Vivamus ornare ultrices facilisis. Ut hendrerit volutpat vulputate. Morbi condimentum venenatis augue, id porta ipsum vulputate in. Curabitur luctus tempus justo. Vestibulum risus lectus, adipiscing nec condimentum quis, condimentum nec nisl. Aliquam dictum sagittis velit sed iaculis. Morbi tristique augue sit amet nulla pulvinar id facilisis ligula mollis. Nam elit libero, tincidunt ut aliquam at, molestie in quam. Aenean rhoncus vehicula hendrerit.
+ImageNet is an image dataset based on the WordNet hierarchy. For each synset, ImageNet provide a set of images depicting it.
