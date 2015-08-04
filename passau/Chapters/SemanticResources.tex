@@ -6,9 +6,23 @@
 
 \lhead{Chapter 2 \emph{Semantic Web Resources}} % Change X to a consecutive number; this is for the header on each page - perhaps a shortened title
 
-%----------------------------------------------------------------------------------------
-%	SECTION 1
-%----------------------------------------------------------------------------------------
+Our study is focus on semantic enrichment of an initial set of keywords which can be organized as sentences or not. It is important to first understand what is a semantic concept and how concepts are organized into ontologies.\\ 
+
+In this section, we will present some general notions about semantic concepts and review several semantic resources, their hierarchical structures and how we access them.
+
+\section{Generalities} % (fold)
+\label{sec:generalities}
+Linguistic semantics is the study of meaning that is used for understanding human expression through language. It is easy for two human-being to communicate (given that they speak the same language) and to understand what their partner say even if he's using a tricky turn of phrase. However, this task becomes way more difficult when it comes to the comprehension of the human language by a machine. How can the computer guess that \say{I am totally dead} means in fact \say{I am really tired} and that the speaker isn't actually dead ? Machines need structured resources to understand us and the Semantic Web is one of them.\\
+
+The notion of \say{Semantic Web} has been mentioned for the first time by Berners-Lee et al in \cite{berners2001semantic}. In this paper, they describe it as a Web which is readable by machines in opposite of most of Web's content which were designed for humans to read. The Semantic Web isn't a separate Web but an extension of the current one which will bring structure to the meaningful content of Web pages.\\
+
+Two main technologies are used for the development of the Semantic Web : eXtensible Markup Language ( short XML) and the Resource Description Framework (short RDF). XML allows everyone to create their own tags and to arbitrary structure their documents but gives no information about what this structure means. Meaning is provided by RDF which stores it in sets of triples which are composed by a subject, a predicate and an object. Those three components can be related to the subject, the verb and object of an elementary sentence. In \cite{miller1998introduction}, Miller present a short introduction to the RDF standard and precise that a \say{Resource} can be any object which is uniquely identifiable by a Uniform Resource Identifier (URI).\\
+
+The third basic component of the Semantic Web are collections of information called ontologies. An ontology is, in computer science, a document which defines the relations among concepts. Basically, Web ontologies are composed of a taxonomy, which defines classes of objects and their relations, and a set of inference rules.\\
+
+Given those basic notions, we will now further detail four semantic web resources, their taxonomies and review some of their usage found in the literature.
+% section generalities (end)
+
 
 \section{DBpedia}
 
