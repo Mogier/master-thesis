@@ -20,21 +20,38 @@ Two main technologies are used for the development of the Semantic Web : eXtensi
 
 The third basic component of the Semantic Web are collections of information called ontologies. An ontology is, in computer science, a document which defines the relations among concepts. Basically, Web ontologies are composed of a taxonomy, which defines classes of objects and their relations, and a set of inference rules.\\
 
+In addition, the The New Oxford Dictionary of English defines the notion of \say{semantic concept} as : \emph{An idea or thought that corresponds to some distinct entity or class of entities, or to its essential features, or determines the application of a term, and thus plays a part in the use of reason or language}
+
 Given those basic notions, we will now further detail four semantic web resources, their taxonomies and review some of their usage found in the literature.
 % section generalities (end)
 
 
-\section{DBpedia}
+\section{DBpedia} % (fold)
+\label{sec:dbpedia}
 
-DBpedia is a project originally launched by two German universities (Berlin and Leipzig) and backed by an important community. It explore and extract information from Wikipedia and then semantically format it. Each encyclopedic document has his own page filled with data store in RDF (Resource Description Framework) triplets.\\
+DBpedia is a project originally launched by two German universities (Berlin and Leipzig) and backed by an important community. It explore Wikipedia and extract information from it which results on the creation of a multilingual, large-scale knowledge base. The extraction framework, all the available end-points as well as some facts and figures about the project are presented in \cite{lehmann2014dbpedia}.\\
 
-DBpedia's hierarchical organization is based on classes and categories. Classes have super-classes and sub-classes, the root element being \say{Thing}.\\
+DBpedia's ontology is based on classes (320 items) which form a subsumption hierarchy, the root element being owl:Thing, with a maximal depth of 5\footnote{Complete classes tree : http://mappings.dbpedia.org/server/ontology/classes/}. Theses classes are described by a total of 1650 different properties, forming a large set of RDF triples.\\
 
-As well as any RDF-structured dataset, DBpedia can be requesting with SPARQL (SPARQL Protocol and RDF Query Language) queries. We can also use online applications according to our needs. For example, DBpedia Spotlight detects DBpedia entities/classes in a text which can be really useful if we possess a description.
+Even though DBpedia is now a worldwide project and provides pages in 125 languages, the English one is still the most represented. We can indeed find 4.58 million of things\footnote{http://wiki.dbpedia.org/about/facts-figures} including 1,445,000 instances of the class \textit{Person}, 735,000 places \textit{Place}, 251,000 \textit{Species} \dots The number of instances described in this language is about three time larger than the second and third language (French and German). 
 
-%----------------------------------------------------------------------------------------
-%	SECTION 2
-%----------------------------------------------------------------------------------------
+As well as any RDF-structured dataset, DBpedia can be requesting with SPARQL (which is an recursive acronym : SPARQL Protocol and RDF Query Language) queries. SPARQL allows the user to search, add, modify or delete RDF data available on the Internet, see \cite{prud2008sparql} for more details about the language. \\
+
+\lstinputlisting[language=SQL,
+	caption=SPARQL Query : Search classes,
+	label={code:findClass}]
+	{./Primitives/findClass.sql}
+
+\lstinputlisting[language=SQL,
+	caption=SPARQL Query : Search superclasses,
+	label={code:findSuperClass}]
+	{./Primitives/findSuperClass.sql}
+
+Codes \ref{code:findClass} and \ref{code:findSuperClass} present two simple and generic SPARQL search queries wich returns respectively the class(es) of a given entity E and the superclass(es) of a given class C.\\
+
+DBpedia also provides useful web services and HTTP endpoints. DBpedia Spotlight, which highlight DBpedia concepts in an input text is described in \cite{mendes2011dbpedia} and further details about disambiguation using this service are presented in section \ref{sec:dbpedia_spotlight}. The official DBpedia SPARQL endpoint\footnote{http://dbpedia.org/sparql} allows the user to send SPARQL query to the online Virtuoso Triple Store by using the browser interface or by sending a HTPP request. We learn in \cite{lehmann2014dbpedia} that the average amount of hits per day of this endpoint is of 2,910,410 for the 3.8 dataset version. 
+
+% section dbpedia (end)
 
 \section{GeoNames}
 

@@ -30,9 +30,46 @@
 \graphicspath{{Pictures/}} % Specifies the directory where pictures are stored
 
 \usepackage[square, numbers, comma, sort&compress]{natbib} % Use the natbib reference package - read up on this to edit the reference style; if you want text (e.g. Smith et al., 2012) for the in-text references (instead of numbers), remove 'numbers' 
-\usepackage{dirtytalk, cleveref}
-\hypersetup{urlcolor=blue, colorlinks=true} % Colors hyperlinks in blue - change to black if annoying
+\usepackage{dirtytalk, cleveref,listings, color, graphicx,pxfonts}
+\hypersetup{urlcolor=black, colorlinks=true} % Colors hyperlinks in blue - change to black if annoying
 \title{\ttitle} % Defines the thesis title - don't touch this
+
+\definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{mauve}{rgb}{0.58,0,0.82}
+\definecolor{gray}{rgb}{0.4,0.4,0.4}
+\definecolor{darkblue}{rgb}{0.0,0.0,0.6}
+\definecolor{lightblue}{rgb}{0.0,0.0,0.9}
+\definecolor{cyan}{rgb}{0.0,0.6,0.6}
+\definecolor{darkred}{rgb}{0.6,0.0,0.0}
+
+\lstset{
+  basicstyle=\ttfamily\footnotesize,
+  columns=fullflexible,
+  showstringspaces=false,
+  keywordstyle=\color{black}\bfseries,
+  numbers=left,                   % where to put the line-numbers
+  numberstyle=\tiny\color{gray},  % the style that is used for the line-numbers
+  stepnumber=1,
+  numbersep=5pt,                  % how far the line-numbers are from the code
+  backgroundcolor=\color{white},      % choose the background color. You must add \usepackage{color}
+  showspaces=false,               % show spaces adding particular underscores
+  showstringspaces=false,         % underline spaces within strings
+  showtabs=false,                 % show tabs within strings adding particular underscores
+  frame=none,                   % adds a frame around the code
+  rulecolor=\color{black},        % if not set, the frame-color may be changed on line-breaks within not-black text (e.g. commens (green here))
+  tabsize=2,                      % sets default tabsize to 2 spaces
+  captionpos=b,                   % sets the caption-position to bottom
+  breaklines=true,                % sets automatic line breaking
+  breakatwhitespace=false,        % sets if automatic breaks should only happen at whitespace
+  title=\lstname,                   % show the filename of files included with \lstinputlisting;
+                                  % also try caption instead of title
+  commentstyle=\color{gray}\upshape
+}
+
+\lstdefinelanguage{SQL}{
+	morekeywords={PREFIX, SELECT, WHERE}
+}
 
 \begin{document}
 
@@ -48,6 +85,7 @@
 \pagestyle{fancy} % Finally, use the "fancy" page style to implement the FancyHdr headers
 
 \newcommand{\HRule}{\rule{\linewidth}{0.5mm}} % New command to make the lines in the title page
+\renewcommand{\lstlistingname}{Code}
 
 % PDF meta-data
 \hypersetup{pdftitle={\ttitle}}
@@ -122,6 +160,10 @@ Tim Berners-Lee
 
 This master thesis was done in the context of the double master degree Informatique - Information und Kommunikation (IFIK), which brings together two Master programs : a degree in computer engineering at the National Institute of Applied Sciences in Lyon (INSA Lyon) and a Master in Informatik (Schwerpunkt : Information und Kommunikationssysteme) at the University of Passau.\\
 
+\textbf{Add some thanks here : Pr. Kosh, Brunie, Dr. Coquil, Egyed}
+
+I would also like to thanks the Dropkick Murphys for their energizing music and the local producers of coffee worldwide for this magical beverage.  
+
 }
 \clearpage % Start a new page
 
@@ -164,9 +206,10 @@ The Thesis Abstract is written here (and usually kept to just this page). The pa
 \lhead{\emph{Abbreviations}} % Set the left side page header to "Abbreviations"
 \listofsymbols{ll} % Include a list of Abbreviations (a table of two columns)
 {
-\textbf{XML} & e\textbf{X}tensible \textbf{M}arkup \textbf{L}anguage \\
+\textbf{SPARQL} & \textbf{S}PARQL \textbf{P}rotocol \textbf{a}nd \textbf{R}DF \textbf{Q}uery \textbf{L}anguage \\
 \textbf{RDF} & \textbf{R}esource \textbf{D}escription \textbf{F}ramework \\
 \textbf{URI} & \textbf{U}niversal \textbf{R}esource \textbf{I}dentifier \\
+\textbf{XML} & e\textbf{X}tensible \textbf{M}arkup \textbf{L}anguage \\
 }
 
 %----------------------------------------------------------------------------------------
