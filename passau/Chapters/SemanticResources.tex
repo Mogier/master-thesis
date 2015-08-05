@@ -29,35 +29,52 @@ Given those basic notions, we will now further detail four semantic web resource
 \section{DBpedia} % (fold)
 \label{sec:dbpedia}
 
-DBpedia is a project originally launched by two German universities (Berlin and Leipzig) and backed by an important community. It explore Wikipedia and extract information from it which results on the creation of a multilingual, large-scale knowledge base. The extraction framework, all the available end-points as well as some facts and figures about the project are presented in \cite{lehmann2014dbpedia}.\\
+DBpedia\footnote{http://wiki.dbpedia.org/} is a project originally launched by two German universities (Berlin and Leipzig) and backed by an important community. It explore Wikipedia\footnote{https://en.wikipedia.org/} and extract information from it which results on the creation of a multilingual, large-scale knowledge base. The extraction framework, all the available end-points as well as some facts and figures about the project are presented in \cite{lehmann2014dbpedia}.\\
 
-DBpedia's ontology is based on classes (320 items) which form a subsumption hierarchy, the root element being owl:Thing, with a maximal depth of 5\footnote{Complete classes tree : http://mappings.dbpedia.org/server/ontology/classes/}. Theses classes are described by a total of 1650 different properties, forming a large set of RDF triples.\\
+DBpedia's ontology is based on classes (320 items) which form a subsumption hierarchy, the root element being owl:Thing, with a maximal depth of 5\footnote{Complete classes tree : http://mappings.dbpedia.org/server/ontology/classes/}. Theses classes are described by a total of 1650 different properties, forming a large set of RDF triples (580 million extracted from the English version of Wikipedia).\\
 
-Even though DBpedia is now a worldwide project and provides pages in 125 languages, the English one is still the most represented. We can indeed find 4.58 million of things\footnote{http://wiki.dbpedia.org/about/facts-figures} including 1,445,000 instances of the class \textit{Person}, 735,000 places \textit{Place}, 251,000 \textit{Species} \dots The number of instances described in this language is about three time larger than the second and third language (French and German). 
+Even though DBpedia is now a worldwide project and provides pages in 125 languages, the English one is still the most represented. We can indeed find 4.58 million of things\footnote{http://wiki.dbpedia.org/about/facts-figures} including 1,445,000 instances of the class \textit{Person}, 735,000 places \textit{Place}, 251,000 \textit{Species} \dots The number of instances described in this language is about three time larger than the second and third language (French and German). \\
 
 As well as any RDF-structured dataset, DBpedia can be requesting with SPARQL (which is an recursive acronym : SPARQL Protocol and RDF Query Language) queries. SPARQL allows the user to search, add, modify or delete RDF data available on the Internet, see \cite{prud2008sparql} for more details about the language. \\
 
-\lstinputlisting[language=SQL,
+\lstinputlisting[language=SPARQL,
 	caption=SPARQL Query : Search classes,
 	label={code:findClass}]
-	{./Primitives/findClass.sql}
+	{./Primitives/findClass.sparql}
 
-\lstinputlisting[language=SQL,
+\lstinputlisting[language=SPARQL,
 	caption=SPARQL Query : Search superclasses,
 	label={code:findSuperClass}]
-	{./Primitives/findSuperClass.sql}
+	{./Primitives/findSuperClass.sparql}
 
-Codes \ref{code:findClass} and \ref{code:findSuperClass} present two simple and generic SPARQL search queries wich returns respectively the class(es) of a given entity E and the superclass(es) of a given class C.\\
+Codes \ref{code:findClass} and \ref{code:findSuperClass} present two simple and generic SPARQL search queries wich returns respectively the class(es) of a given entity E and the superclass(es) of a given class C. using the \textit{type} and \textit{subClassOf} predicates.\\
 
-DBpedia also provides useful web services and HTTP endpoints. DBpedia Spotlight, which highlight DBpedia concepts in an input text is described in \cite{mendes2011dbpedia} and further details about disambiguation using this service are presented in section \ref{sec:dbpedia_spotlight}. The official DBpedia SPARQL endpoint\footnote{http://dbpedia.org/sparql} allows the user to send SPARQL query to the online Virtuoso Triple Store by using the browser interface or by sending a HTPP request. We learn in \cite{lehmann2014dbpedia} that the average amount of hits per day of this endpoint is of 2,910,410 for the 3.8 dataset version. 
+DBpedia also provides useful web services and HTTP endpoints. DBpedia Spotlight, which highlight DBpedia concepts in an input text is described in \cite{mendes2011dbpedia} and further details about disambiguation using this service are presented in section \ref{sec:dbpedia_spotlight}. The official DBpedia SPARQL endpoint\footnote{http://dbpedia.org/sparql} allows the user to send SPARQL query to the online Virtuoso Triple Store by using the browser interface or by sending a HTPP request. We learn in \cite{lehmann2014dbpedia} that the average amount of hits per day of this endpoint is of 2,910,410 for the 3.8 dataset version. \\
 
+We find lot of papers in the literature which mention DBpedia as an asset for systems based on the Semantic Web. If some of those papers are still in the research field, like \cite{passant2010dbrec} which proposes a music recommendation system built on top of DBpedia, others present \say{real} applications which are currently in use. We can cite for instance \cite{kobilarov2009media} which describes how the BBC\footnote{http://www.bbc.co.uk/} uses DBpedia to backbone its publications. 
 % section dbpedia (end)
 
-\section{GeoNames}
+\section{Geonames} % (fold)
+\label{sec:geonames}
 
-GeoNames is a geographical database which contains more than 6,5 million places. It's a collaborative tool : users can add data or edit the existing ones. GeoNames' data are link to other RDF resources (mainly DBpedia). \\
+GeoNames\footnote{http://www.geonames.org/} is a geographical database which contains over 10 million geographical names. The most documented countries\footnote{http://www.geonames.org/statistics/} are the United States of America (2,203,094 names), Norway (600,008) and China (526,456). All resources are categorized into one out of nine classes and further subcategorized into one out of 645 codes\footnote{http://www.geonames.org/export/codes.html}.\\
 
-Semantically speaking, each GeoNames' resource is link to an URI. This URI lead the user to an HTML page or to a RDF description. We can then write SPARQL queries using specific namespaces and request GeoNames. This resource is a key in our process, it will give us our first information about the picture given its GPS coordinates.
+Like DBpedia, the Geonames' ontology makes possible the addition of new resources to the World Wide Web. However, Geonames distinguish the features' Concept from the RDF document about it. In consequence, each feature possesses two representation in Geonames. See the two following URIs as example :
+\begin{description}
+\item[URI1] http://sws.geonames.org/8015555/
+\item[URI2] http://sws.geonames.org/8015555/about.rdf
+\end{description}
+The first one stands for the \say{Notre Dame de Fourvière} church in Lyon, France. This URI is used when one wants to refers to the church itself. The second URI is the RDF document with what Geonames knows about the church, its latitude and longitude for instance, or some nearby locations.\\
+
+In order to allow the user to browse its \emph{Tremendous set of data} (Sir T. Berners-Lee), Geonames proposes a lot of REST-based web-services. In the case of image annotation, one in particular could be useful. Given that lot of recent numeric images contain EXIF data which embed GPS information such as the longitude and the latitude (see \cite{tevsic2005metadata} for further details about the EXIF format), one could add geographic tags to the picture with the help of the \textit{findNearbyPlaceName} service. Here is an example of usage :\\
+\underline{Query} : http://api.geonames.org/findNearbyPlaceName?lat=48.566\&lng=13.43\&username=demo 
+\lstinputlisting[language=XML,
+	caption=XML response,
+	label={code:passauXML}]
+	{./Primitives/passau.xml}
+
+Given its specific domains, we found less use-cases of Geonames in the literature than DBpedia's. Some interesting works have however been presented, like \cite{stern2010detection} which use several semantic resources including Geonames in order to detect named entities in \say{Agence France Presse} (AFP) wires.
+% section geonames (end)
 
 \section{WordNet}
 

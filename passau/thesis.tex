@@ -67,8 +67,20 @@
   commentstyle=\color{gray}\upshape
 }
 
-\lstdefinelanguage{SQL}{
+\lstdefinelanguage{SPARQL}{
 	morekeywords={PREFIX, SELECT, WHERE}
+}
+
+\lstdefinelanguage{XML}
+{
+  morestring=[s][\color{mauve}]{"}{"},
+  morestring=[s][\color{black}]{>}{<},
+  morecomment=[s]{<?}{?>},
+  morecomment=[s][\color{dkgreen}]{!--}{--},
+  stringstyle=\color{black},
+  identifierstyle=\color{lightblue},
+  keywordstyle=\color{red},
+  % morekeywords={xmlns,xsi,noNamespaceSchemaLocation,type,id,x,y,source,target,version,tool,transRef,roleRef,objective,eventually}% list your attributes here
 }
 
 \begin{document}
