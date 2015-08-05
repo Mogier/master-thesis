@@ -47,9 +47,9 @@ As well as any RDF-structured dataset, DBpedia can be requesting with SPARQL (wh
 	label={code:findSuperClass}]
 	{./Primitives/findSuperClass.sparql}
 
-Codes \ref{code:findClass} and \ref{code:findSuperClass} present two simple and generic SPARQL search queries wich returns respectively the class(es) of a given entity E and the superclass(es) of a given class C. using the \textit{type} and \textit{subClassOf} predicates.\\
+Codes \ref{code:findClass} and \ref{code:findSuperClass} present two simple and generic SPARQL search queries wich return respectively the class(es) of a given entity E and the superclass(es) of a given class C. using the \textit{type} and \textit{subClassOf} predicates.\\
 
-DBpedia also provides useful web services and HTTP endpoints. DBpedia Spotlight, which highlight DBpedia concepts in an input text is described in \cite{mendes2011dbpedia} and further details about disambiguation using this service are presented in section \ref{sec:dbpedia_spotlight}. The official DBpedia SPARQL endpoint\footnote{http://dbpedia.org/sparql} allows the user to send SPARQL query to the online Virtuoso Triple Store by using the browser interface or by sending a HTPP request. We learn in \cite{lehmann2014dbpedia} that the average amount of hits per day of this endpoint is of 2,910,410 for the 3.8 dataset version. \\
+DBpedia also provides useful web services and HTTP endpoints. DBpedia Spotlight, which highlight DBpedia concepts in an input text is described in \cite{mendes2011dbpedia} and further details about disambiguation using this service are presented in section \ref{sec:dbpedia_spotlight}. The official DBpedia SPARQL endpoint\footnote{http://dbpedia.org/sparql} allows the user to send SPARQL queries to the online Virtuoso Triple Store by using the browser interface or by sending a HTPP request. We learn in \cite{lehmann2014dbpedia} that the average amount of hits per day of this endpoint is of 2,910,410 for the 3.8 dataset version. \\
 
 We find lot of papers in the literature which mention DBpedia as an asset for systems based on the Semantic Web. If some of those papers are still in the research field, like \cite{passant2010dbrec} which proposes a music recommendation system built on top of DBpedia, others present \say{real} applications which are currently in use. We can cite for instance \cite{kobilarov2009media} which describes how the BBC\footnote{http://www.bbc.co.uk/} uses DBpedia to backbone its publications. 
 % section dbpedia (end)
@@ -57,7 +57,7 @@ We find lot of papers in the literature which mention DBpedia as an asset for sy
 \section{Geonames} % (fold)
 \label{sec:geonames}
 
-GeoNames\footnote{http://www.geonames.org/} is a geographical database which contains over 10 million geographical names. The most documented countries\footnote{http://www.geonames.org/statistics/} are the United States of America (2,203,094 names), Norway (600,008) and China (526,456). All resources are categorized into one out of nine classes and further subcategorized into one out of 645 codes\footnote{http://www.geonames.org/export/codes.html}.\\
+GeoNames\footnote{http://www.geonames.org/} is a geographical database which contains over 10 million geographical names. The most documented countries\footnote{http://www.geonames.org/statistics/} are the United States of America (2,203,094 names), Norway (600,008) and China (526,456). All resources are categorized into one out of nine classes and further subcategorized into one out of 645 codes\footnote{http://www.geonames.org/export/codes.html}. Obviously, the root element of Geonames' hierarchy is mother earth.\\
 
 Like DBpedia, the Geonames' ontology makes possible the addition of new resources to the World Wide Web. However, Geonames distinguish the features' Concept from the RDF document about it. In consequence, each feature possesses two representation in Geonames. See the two following URIs as example :
 \begin{description}
@@ -73,15 +73,29 @@ In order to allow the user to browse its \emph{Tremendous set of data} (Sir T. B
 	label={code:passauXML}]
 	{./Primitives/passau.xml}
 
-Given its specific domains, we found less use-cases of Geonames in the literature than DBpedia's. Some interesting works have however been presented, like \cite{stern2010detection} which use several semantic resources including Geonames in order to detect named entities in \say{Agence France Presse} (AFP) wires.
+Given its specific domain, we found less use-cases of Geonames in the literature than DBpedia's. Some interesting papers have however been presented, like \cite{stern2010detection} which use several semantic resources including Geonames in order to detect named entities in \say{Agence France Presse} (AFP) wires.
 % section geonames (end)
 
-\section{WordNet}
+\section{WordNet} % (fold)
+\label{sec:wordnet}
 
-WordNet is a lexical database created by Priceton University. Its structure is based on the "synset" (synonym set), a set of words with the same meaning. If DBpedia's architecture uses classes, Wordnet use hyponyms and hyperonyms. The root element is "entity".\\
+WordNet\footnote{https://wordnet.princeton.edu/} is a lexical database of English which has been presented for the first time in 1995 in \cite{miller1995wordnet}. It is hosted by the Princeton University, currently running version 3.1 but there are no current plan for a future release due to limited staffing.\\
 
-This resource is useful if we are searching for entities (tsetse-fly, jaguar, ...) but it also contains more general concepts (vehicle, animal, ...). It also have interesting links, like meronyms ("HAS-PART" relation), holonyms (the opposite), synonyms or antonyms.
+Its structure is based on the concept of \say{synset} (synonym set), a set cognitive synonyms. WordNet distinguish among Types (common nouns, verbs\dots) and Instances (specific persons\dots). Synsets are interliked using conceptual, semantic and lexical relations. The hierarchy is built by the use of the super-subordinate relation (or hyperonymy, hyponymy in WordNet's jargon). These relations implements the two directions of the \say{IS-A} expression. For instance, \textit{fruit} is \textbf{hyperonym} of \textit{apple} and \textit{horst} is a \textbf{hyponym} of \textit{animal}, the root element being \say{entity}. Other relations are also provided, like the antonymy (opposite of synonymy) or the meronymy and its opposite holonymy which implements the \say{IS-PART-OF} relation : \textit{finger} is a \textbf{meronym} of \textit{hand}. All these relations are transitive.\\
 
-\section{ImageNet}
+This resource is useful if we are searching for entities. Since the maximal depth is of the ontology is of 16, the leafs are very detailed nous (tsetse-fly, Yukon white birch, \dots) but it also contains more general concepts (vehicle, animal, \dots). WordNet contains at the moment 155,287 unique strings incuding 117,798 nouns.\\ 
 
-ImageNet is an image dataset based on the WordNet hierarchy. For each synset, ImageNet provide a set of images depicting it.
+It exists several ways to browse this resource. An online interface allows the user to manually query the dataset and to navigate in it through hyperlinks. For software and research purposes, the user has to download one of the released version of WordNet's dataset as well as a specific library according to the code language he's using.\\
+
+Due to the lot of different relations between its synsets, WordNet has mostly been used for measuring semantic distances (see \cite{budanitsky2001semantic}, \cite{richardson1994using} and \cite{agirre2009study}) or to disambiguate texts (in \cite{resnik1995disambiguating}, \cite{voorhees1993using} and \cite{banerjee2002adapted}).\\
+% section wordnet (end)
+
+\section{ImageNet} % (fold)
+\label{sec:imagenet}
+
+ImageNet\footnote{http://www.image-net.org/} is an image database built on the WordNet hierarchy. It has been launch in 2009 and presented in \cite{deng2009imagenet}. Each of WordNet's synsets is depicted in ImageNet by a set of pictures (more than 500 in average). At the moment, 14,197,122 images are referenced.\\
+
+The stated aim of ImageNet is to serve as an asset for pedagogical and research purposes. It has for instance been used in \cite{deselaers2011visual} to measure the correlation between visual and semantic similarities or in a kindergarten in Canada to provide matching exercises to the children.\\
+
+Despite the fact this resource is not as used as the previous ones, it was important to cite it in order to highlight the semantic concepts and images can be related even tough it's two different kind of medium.  
+% section imagenet (end)
