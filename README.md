@@ -6,3 +6,5 @@ The repository has 2 sub-projects :
   - lyon/ which contains a smaller report for the french side (rapport PFE), engineering-oriented.
 
 I used the LaTeX template available [here](http://www.latextemplates.com/template/masters-doctoral-thesis) for the MasterArbeit and the basic article LaTeX class for the PFE. I also used the SublimeText's plugin [LaTeXTools](https://github.com/SublimeText/LaTeXTools).
+
+PS : English isn't my mother tongue :)
