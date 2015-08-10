@@ -6,22 +6,48 @@
 
 \lhead{Chapter 5 \emph{Existing services}} % Change X to a consecutive number; this is for the header on each page - perhaps a shortened title
 
-%----------------------------------------------------------------------------------------
-%	SECTION 1
-%----------------------------------------------------------------------------------------
+We found in the literature lot of research which talk about multimedia tagging/annotation/labelling. These papers mainly use both the visual multimedia information (low-level features) and the textual information they might have at disposal (high-level features, meta-data). A review of the existing tagging-based applications is propose by Wand and al. in \cite{wang2012assistive}.\\
+These works aren't our main focus, here we will present textual-only tagging approaches.
 
-\section{Web service 1}
+\section{Mixing Statistics and WordNet} % (fold)
+\label{sec:mixing_statistics_and_wordnet}
+In \cite{jin2005image}, Jin and al. propose the integration of the WordNet (\ref{sub:wordnet}) semantic resource in a statistic-based annotation process in order to remove irrelevant keywords.\\
+Their algorithm is organized as follows : they first generate a set of keywords with the help of a statistical model called \emph{Translation Model} (TM). Some of those candidates tags are relevant and some aren't.\\
+In order to filter the irrelevant ones, they then compute several semantic similarity measures : 
+\begin{enumerate}
+	\item Lin - \ref{sub:lin}
+	\item Jiang and Conrath - \ref{sub:jiang_and_conrath}
+	\item Banerjee and Pedersen - see \cite{banerjee2003extended}
+\end{enumerate}
+Finally, they combine these metrics using Dempster-Shafer Theory (\cite{shafer1976mathematical}) and the keywords with a resulting score under a chosen threshold are removed. Detailed method steps are presented in the original paper. \\
+Concerning their results, they compare their \emph{TMHD} proposed approach with a basic TM process. Based on a set of most frequently used keywords, they found that, on average, precisions values of TM and TMHD are respectively 14.21\% and 33.11\%. This indicates that TMHD is 56.87\% better than TM. It is interesting to note that the recall score stays the same due to the fact that only irrelevant keywords are removed. They also compare \emph{TMHD} to the use of individual measures with TM and the results aren't as good as those from their combination.\\
+These results show the power of knowledge-based data and similarity measures when it's added to a statistical model.
+% section mixing_statistics_and_wordnet (end)
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam ultricies lacinia euismod. Nam tempus risus in dolor rhoncus in interdum enim tincidunt. Donec vel nunc neque. In condimentum ullamcorper quam non consequat. Fusce sagittis tempor feugiat. Fusce magna erat, molestie eu convallis ut, tempus sed arcu. Quisque molestie, ante a tincidunt ullamcorper, sapien enim dignissim lacus, in semper nibh erat lobortis purus. Integer dapibus ligula ac risus convallis pellentesque.
+\section{Graph-cut based enrichment} % (fold)
+\label{sec:graph_cut_based_enrichment}
+In \cite{qian2011graph}, Qian and Hua expose their graph-based approach of the tag enrichment process. They represent each initial tag of their corpus as a node and interlink them (using \emph{n-links}). The weight of those n-links can be seen as the similarity between the two linked nodes, computed by the help of the Google distance \cite{cilibrasi2007google}. They add two virtual nodes called \emph{sink} and \emph{source}. Then, they link all nodes to one of these virtual nodes using \emph{t-links}.\\
+The aim of their approach is to split all the tags into two distinct sets S (containing the source node) and T (containing the sink one) by assigning the labels s (source) if the tag is relevant to the image and t (sink) if not to the nodes. Then, they determine how many tags are relevant to the image by solving the combinational optimization problem through the graph.\\
+This paper is really short and not very clear but it gives good ideas about the tags' representation as a graph and how to interlink them. According to the authors, the results are satisfactory.   
+% section graph_cut_based_enrichment (end)
 
-%----------------------------------------------------------------------------------------
-%	SECTION 2
-%----------------------------------------------------------------------------------------
-
-\section{Web service 2}
-
-Sed ullamcorper quam eu nisl interdum at interdum enim egestas. Aliquam placerat justo sed lectus lobortis ut porta nisl porttitor. Vestibulum mi dolor, lacinia molestie gravida at, tempus vitae ligula. Donec eget quam sapien, in viverra eros. Donec pellentesque justo a massa fringilla non vestibulum metus vestibulum. Vestibulum in orci quis felis tempor lacinia. Vivamus ornare ultrices facilisis. Ut hendrerit volutpat vulputate. Morbi condimentum venenatis augue, id porta ipsum vulputate in. Curabitur luctus tempus justo. Vestibulum risus lectus, adipiscing nec condimentum quis, condimentum nec nisl. Aliquam dictum sagittis velit sed iaculis. Morbi tristique augue sit amet nulla pulvinar id facilisis ligula mollis. Nam elit libero, tincidunt ut aliquam at, molestie in quam. Aenean rhoncus vehicula hendrerit.
-
-\section{Annotation via stats}
-
-Sed ullamcorper quam eu nisl interdum at interdum enim egestas. Aliquam placerat justo sed lectus lobortis ut porta nisl porttitor. Vestibulum mi dolor, lacinia molestie gravida at, tempus vitae ligula. Donec eget quam sapien, in viverra eros. Donec pellentesque justo a massa fringilla non vestibulum metus vestibulum. Vestibulum in orci quis felis tempor lacinia. Vivamus ornare ultrices facilisis. Ut hendrerit volutpat vulputate. Morbi condimentum venenatis augue, id porta ipsum vulputate in. Curabitur luctus tempus justo. Vestibulum risus lectus, adipiscing nec condimentum quis, condimentum nec nisl. Aliquam dictum sagittis velit sed iaculis. Morbi tristique augue sit amet nulla pulvinar id facilisis ligula mollis. Nam elit libero, tincidunt ut aliquam at, molestie in quam. Aenean rhoncus vehicula hendrerit.
+\section{Enrich Folksonomy Tag Space} % (fold)
+\label{sec:enrich_folksonomy_tag_space}
+Folksonomies are typical Web 2.0 systems that allow users to upload, tag and share content such as pictures, bookmarks \dots In \cite{angeletou2007bridging}, Angeletou and al. envisaged tag space enrichment with semantic relations by exploring online ontologies. Their method is composed of two phases :
+\begin{itemize}
+	\item Concept identification 
+	\item Relation discovery
+\end{itemize}
+The first step is achieved by extracting concepts from online ontologies in which the local concept label matches the tag. In order to exploit all meanings, the authors retrieve all the potential semantic terms for each tag and then discover relation between them in the second phase. This means that no disambiguation is processed but it is a consequence of the relation discovery phase.\\
+This phase consist of the identification of the relation between two tags \emph{T1} and \emph{T2}. Four kind of relations are distinguished :
+\begin{itemize}
+	\item Subsumption relation : \emph{T1} subClassOf \emph{T2}
+	\item Disjointness relation : \emph{T1} disjointWith \emph{T2}
+	\item Generic relation : Property1 hasDomain \emph{T1} and Property1 hasRange \emph{T2}
+	\item Sibling relation : \emph{T1} and \emph{T2} share a common ancestor
+	\item Instance Of relation : \emph{T1} instanceOf \emph{T2}
+\end{itemize}
+These relations can be found by two ways : a relation can be declared within an ontology or, if no ontology contain such relation, one is made by crossing knowledge from different ontologies.\\
+The author the present different experiments as well as some issues rose during this phase. One in particular is important to keep in mind : when users tags resources, especially pictures, they tend to tag them with specific vocabulary, mainly instances rather than \emph{abstract} concepts. This can result on lot of \say{semantic noise} : tags which can't be match with concepts from online ontologies.\\
+This paper is really interesting and approaches the topic in a very general point of view, which ensure the flexibility of its implementation. We will see in \ref{chapter:Methodology} that this method perfectly adapt to our study. 
+% section enrich_folksonomy_tag_space (end)

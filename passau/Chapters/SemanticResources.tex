@@ -1,10 +1,10 @@
 %!TEX root = ../thesis.tex
 
-\chapter{Semantic Web Resources} % Main chapter title
+\chapter{Semantic Web} % Main chapter title
 
 \label{chapter:SemanticWebResources} % Change X to a consecutive number; for referencing this chapter elsewhere, use \ref{ChapterX}
 
-\lhead{Chapter 2 \emph{Semantic Web Resources}} % Change X to a consecutive number; this is for the header on each page - perhaps a shortened title
+\lhead{Chapter 2 \emph{Semantic Web}} % Change X to a consecutive number; this is for the header on each page - perhaps a shortened title
 
 Our study is focus on semantic enrichment of an initial set of keywords which can be organized as sentences or not. It is important to first understand what is a semantic concept and how concepts are organized into ontologies.\\ 
 
@@ -25,9 +25,10 @@ In addition, the The New Oxford Dictionary of English defines the notion of \say
 Given those basic notions, we will now further detail four semantic web resources, their taxonomies and review some of their usage found in the literature.
 % section generalities (end)
 
-
-\section{DBpedia} % (fold)
-\label{sec:dbpedia}
+\section{Semantic Resources} % (fold)
+\label{sec:semantic_resources}
+\subsection{DBpedia} % (fold)
+\label{sub:dbpedia}
 
 DBpedia\footnote{http://wiki.dbpedia.org/} is a project originally launched by two German universities (Berlin and Leipzig) and backed by an important community. It explores Wikipedia\footnote{https://en.wikipedia.org/} and extract information from it which results on the creation of a multilingual, large-scale knowledge base. The extraction framework, all the available end-points as well as some facts and figures about the project are presented in \cite{lehmann2014dbpedia}.\\
 
@@ -49,13 +50,13 @@ As well as any RDF-structured dataset, DBpedia can be requesting with SPARQL (wh
 
 Codes \ref{code:findClass} and \ref{code:findSuperClass} present two simple and generic SPARQL search queries wich return respectively the class(es) of a given entity E and the superclass(es) of a given class C using the \textit{type} and \textit{subClassOf} predicates.\\
 
-DBpedia also provides useful web services and HTTP endpoints. DBpedia Spotlight, which highlight DBpedia concepts in an input text is described in \cite{mendes2011dbpedia} and further details about disambiguation using this service are presented in section \ref{sec:dbpedia_spotlight}. The official DBpedia SPARQL endpoint\footnote{http://dbpedia.org/sparql} allows the user to send SPARQL queries to the online Virtuoso Triple Store by using the browser interface or by sending a HTPP request. We learn in \cite{lehmann2014dbpedia} that the average amount of hits per day of this endpoint is of 2,910,410 for the 3.8 dataset version. \\
+DBpedia also provides useful web services and HTTP endpoints. DBpedia Spotlight, which highlight DBpedia concepts in an input text is described in \cite{mendes2011dbpedia} and further details about disambiguation using this service are presented in subsection \ref{sec:dbpedia_spotlight}. The official DBpedia SPARQL endpoint\footnote{http://dbpedia.org/sparql} allows the user to send SPARQL queries to the online Virtuoso Triple Store by using the browser interface or by sending a HTPP request. We learn in \cite{lehmann2014dbpedia} that the average amount of hits per day of this endpoint is of 2,910,410 for the 3.8 dataset version. \\
 
 We find lot of papers in the literature which mention DBpedia as an asset for systems based on the Semantic Web. If some of those papers are still in the research field, like \cite{passant2010dbrec} which proposes a music recommendation system built on top of DBpedia, others present \say{real} applications which are currently in use. We can cite for instance \cite{kobilarov2009media} which describes how the BBC\footnote{http://www.bbc.co.uk/} uses DBpedia to backbone its publications. 
-% section dbpedia (end)
+% subsection dbpedia (end)
 
-\section{Geonames} % (fold)
-\label{sec:geonames}
+\subsection{Geonames} % (fold)
+\label{sub:geonames}
 
 GeoNames\footnote{http://www.geonames.org/} is a geographical database which contains over 10 million geographical names. The most documented countries\footnote{http://www.geonames.org/statistics/} are the United States of America (2,203,094 names), Norway (600,008) and China (526,456). All resources are categorized into one out of nine classes and further subcategorized into one out of 645 codes\footnote{http://www.geonames.org/export/codes.html}. Obviously, the root element of Geonames' hierarchy is mother earth.\\
 
@@ -74,10 +75,10 @@ In order to allow the user to browse its \emph{Tremendous set of data} (Sir T. B
 	{./Primitives/passau.xml}
 
 Given its specific domain, we found less use-cases of Geonames in the literature than DBpedia's. Some interesting papers have however been presented, like \cite{stern2010detection} which use several semantic resources including Geonames in order to detect named entities in \say{Agence France Presse} (AFP) wires.
-% section geonames (end)
+% subsection geonames (end)
 
-\section{WordNet} % (fold)
-\label{sec:wordnet}
+\subsection{WordNet} % (fold)
+\label{sub:wordnet}
 
 WordNet\footnote{https://wordnet.princeton.edu/} is a lexical database of English which has been presented for the first time in 1995 in \cite{miller1995wordnet}. It is hosted by the Princeton University, currently running version 3.1 but there are no current plan for a future release due to limited staffing.\\
 
@@ -88,10 +89,10 @@ This resource is useful if we are searching for entities. Since the maximal dept
 It exists several ways to browse this resource. An online interface allows the user to manually query the dataset and to navigate in it through hyperlinks. For software and research purposes, the user has to download one of the released version of WordNet's dataset as well as a specific library according to the code language he's using.\\
 
 Due to the lot of different relations between its synsets, WordNet has mostly been used for measuring semantic distances (see \cite{budanitsky2001semantic}, \cite{richardson1994using} and \cite{agirre2009study}) or to disambiguate texts (in \cite{resnik1995disambiguating}, \cite{voorhees1993using} and \cite{banerjee2002adapted}).\\
-% section wordnet (end)
+% subsection wordnet (end)
 
-\section{ImageNet} % (fold)
-\label{sec:imagenet}
+\subsection{ImageNet} % (fold)
+\label{sub:imagenet}
 
 ImageNet\footnote{http://www.image-net.org/} is an image database built on the WordNet hierarchy. It has been launch in 2009 and presented in \cite{deng2009imagenet}. Each of WordNet's synsets is depicted in ImageNet by a set of pictures (more than 500 in average). At the moment 14,197,122 images are referenced.\\
 
@@ -99,3 +100,5 @@ The stated aim of ImageNet is to serve as an asset for pedagogical and research 
 
 Despite the fact this resource is not as used as the previous ones, it was important to cite it in order to highlight that semantic concepts and images can be related even tough it's they are different kinds of medium.  
 % section imagenet (end)
+
+% section semantic_resources (end)
