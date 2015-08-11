@@ -7,7 +7,8 @@
 \lhead{Chapter 3 \emph{Disambiguation}} % Change X to a consecutive number; this is for the header on each page - perhaps a shortened title
 
 Let's remember what we say about semantics in \ref{sec:generalities} : it is the study of meaning. The question that we will study here is the following : What happens when a word has several meanings ?\\
-The disambiguation process aims to determine which one of the meanings is relevant in a specific context. In our case, we want to disambiguate the initial tags from a picture in order to propose relevant candidates. To achieve this, several approaches are presented with usages from the literature. Finally, we discuss the its interest in the image annotation process and the issues it may rise. 
+
+The disambiguation process aims to determine which one of the meanings is relevant in a specific context. In our case, we want to disambiguate the initial tags from a picture in order to propose relevant candidates. To achieve this, several approaches are presented with usages from the literature. Finally, we discuss its interest in the image annotation process and the issues it may rise. 
 
 \section{How does it work} % (fold)
 \label{sec:how_does_it_work}
@@ -18,6 +19,7 @@ Let's consider the following sentences :
 	\item I bought some grilled \textit{bass} on the way home.
 \end{enumerate}
 For the human brain, it's obvious that the first one refers to the musical context and the second to a special kind of fish. However, developing algorithms that replicate the this ability is often a difficult task. If we go further, it might be even more difficult to detect the precise meaning of \textit{bass} in the first utterance since, in the musical context, it has two senses : the instrument and the sound.\\
+
 In \cite{ide1998introduction}, Ide and Veronis present a nice state of the art of the disambiguation process. They explain that it takes two main steps :
 \begin{enumerate}
  	\item Determination of all the different senses for every word relevant to the text under consideration
@@ -25,27 +27,31 @@ In \cite{ide1998introduction}, Ide and Veronis present a nice state of the art o
 \end{enumerate} 
 Regarding step 1, \textit{senses} can be pulled out different resources like our everyday dictionaries, groups of features (e.g synsets in WordNet, see \ref{sub:wordnet}) or transfer dictionaries, including translation in another language.\\
 Step 2 is accomplished by reliance on two sources of information. The first one, already mentioned, is the \textit{context} of the word which include information contained in the text in which the word appears and can also be filled by some extra-linguistic information about the text such as a situation. The second one is the external knowledge sources which can be used, such as encyclopedic resources, hand-made knowledge resources \dots\\
-The authors then review all the WSD methods currently in use, see their paper for more information on the topic as well as the issues and problematic it rise.\\
-
+The authors then review all the WSD methods currently in use, see their paper for more information on the topic as well as the issues and problematic it rise.
 % section how_does_it_work (end)
 
 \section{Practical example : DBpedia Spotlight} % (fold)
 \label{sec:dbpedia_spotlight}
 Here we will jump from theory to reality and study how the DBpedia Spotlight\footnote{http://dbpedia-spotlight.github.io/demo/} system process the WSD method in order to automatically annotate text documents with DBpedia (\ref{sub:dbpedia}) URIs. These explanations are pulled out of \cite{mendes2011dbpedia}.\\
+
 Before the disambiguation step, DBpedia Spotlight's algorithm detect entity names (or \textit{surface forms} and pre-rank them with the use of the DBpedia Lexicalization dataset\footnote{http://wiki.dbpedia.org/lexicalizations}. They add an important note : selecting fewer candidates can be good in terms of time cost but can also reduce recall if performed to aggressively.\\
+
 After this selection phase, it use the context around the surface form (paragraphs) as information to find the appropriate disambiguation. DBpedia resources are modeled in a way that each resource is a point in a multidimensional space of words. They illustrate this process saying that this can be seen as an aggregation of all Wikipedia's paragraph mentioning the concept. Some metrics are computed :
 \begin{itemize}
 	\item Term Frequency (TF) weight : represent the relevance of a word for a given resource
 	\item Inverse Document Frequency (IDF) weight : represent the general importance of the word in the collection of DBpedia's resources
 \end{itemize}
 The authors explain then that IDF isn't that good for disambiguation (but pretty good for document retrieval). They propose a new weight called Inverse Candidate Frequency (ICF) in order to weight words based on their ability to distinguish between candidates for a given entity using this affirmation : The discriminative power of a word is inversely proportional to the number of DBpedia resources it is associated with.\\
+
 At the end, given the chosen representation and the TF*ICF weights, the disambiguation process is similar as a ranking problem. They use the cosine similarity to rank vectors according to their context vector and the context surrounding  the surface form.\\
+
 To evaluate their approach, the authors picked 155,000 random ambiguous wikilinks (internal Wikipedia's links) and evaluate five methods. Their TF*ICF method shows promising results, since it matches correct sense at a score of 73.39\% when the IF*IDF only has a score of 55.91\%.
 % section dbpedia_spotlight (end)
 
 \section{Our case} % (fold)
 \label{sec:our_case}
 With the two previous sections, we can conclude that the disambiguation step is interesting and can be process in multiple ways. The results presented by DBpedia Spotlight's team are pretty good and encourage researchers to use this tool.\\
+
 The facts that are important to remember about disambiguation before projecting it in our case is that the process needs resources and a context. Problem is that the image's annotations can't be considered as a context due to their organization and their content. Take these annotations from our dataset (\ref{sec:dataset}) for instance :
 \begin{center}
 	\textit{alley, building exterior, capital cities, city, city life, clear sky, colour image, day, dome, in a row, no people, outdoors, photography, travel destinations, window, czech republic, multi coloured, national landmark}

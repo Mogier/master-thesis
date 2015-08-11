@@ -12,7 +12,7 @@
 
 \section{Background}
 
-Image is a popular medium nowadays : it is easy to capture, can be really light on your computer and speaks to everyone without distinction of language.\\
+Image is a popular medium nowadays : it is easy to capture, can be really light on your electronic device and speaks to everyone without distinction of language.\\
 
 In the all days life, people share their pictures on social networks in less than a blink of eye. In average, 70M of pictures are posted on Instagram each day and the users hit the \say{Like} button 2.5B times\footnote{Stats from : https://instagram.com/press/}. Other services like Picasa or Flickr exists but aren't as used as Instagram which is the favorite in the eyes of the teen public.\\
 Companies also produce a lot of media data. Industry companies need their products' pictures, marketing and advertising studios use a lot of images in order to create new stuff for their client, \dots But the most consumer of media data are obviously mass media themselves : Newspapers, TV shows, news broadcasts are dealing with pictures at every moment of their day.\\
@@ -34,9 +34,10 @@ In the following section, we will present and discuss an application scenario to
 
 NewsTV is a famous TV news channel which runs 24/7 and only speaks about the current news. It has lot of reporters worldwide, covering the important local news and sending their production to the main site in Paris, France.\\
 
-The employees often need to consult older coverages in order to explain the context of the news, to make the necrology of a famous actor who recently died or to re-use common shots. Therefor, they need to query the central multimedia database management system using keywords they are familiar with like \say{Elections, France, 2007, José Bové}. But sometimes, their research aren't so specific and they are looking for more generic pictures, let say \say{Land, Tree, Animal}.\\
+The employees often need to consult older coverages in order to explain the context of the news, to make the necrology of a famous actor who recently died or to re-use common shots. 
+Therefore, they need to query the central multimedia database management system using keywords they are familiar with like \say{Elections, France, 2007, José Bové}. But sometimes, their research aren't so specific and they are looking for more generic pictures, let say \say{Land, Tree, Animal}.\\
 
-The first kind of keywords had been tagged by the former reporter who produced the coverage but he logically didn't think to add generic terms. NewsTV needs something to do it automatically when a picture, or any media, is first added to its system which a couple of initial tags.\\
+The first kind of keywords had been tagged by the former reporter who produced the coverage but he logically didn't think to add generic terms. NewsTV needs something to do it automatically when a picture, or any media, is first added to its system with a few initial tags.\\
 
 Details about which kind of technology can be 	used to achieve this automatic tagging will come in the following sections. To summarize, the goal of this thesis is to propose a running prototype and evaluate different methods of tagging. The questions that we will try to answer during this study are described in the following section.
 
@@ -48,13 +49,13 @@ Sed ullamcorper quam eu nisl interdum at interdum enim egestas. Aliquam placerat
 
 The remainder of this thesis will be organized as follows :
 \begin{description}
-\item\textbf{Chapter~\ref{chapter:SemanticWebResources} - Semantic Web Resources:} presents different semantic web resources, their structures and how to browse them and how are they used in the literature. 
-\item\textbf{Chapter~\ref{chapter:Measures} - Measures:} provides a solid background on semantic similarity and distance measures. We explore different metrics illustrating their pro/cons with examples.
-\item\textbf{Chapter~\ref{chapter:Disambiguation} - Disambiguation:} reviews the literature and assesses the most relevant ways to disambiguate a list of keywords which may be organize into sentences or not. 
-\item\textbf{Chapter~\ref{chapter:ExistingServices} - Existing Services:} describes existing image annotation services as well as their use-cases.
-\item\textbf{Chapter~\ref{chapter:SotAConclusion} - State of the Art Conclusion:} summarizes the findings of the previous state of the art and opens the way to the presented contribution.
+\item\textbf{Chapter~\ref{chapter:SemanticWebResources} - Semantic Web :} presents the general concept of the semantic web and different semantic web resources, their structures, how to browse them and how are they used in the literature. 
+\item\textbf{Chapter~\ref{chapter:Measures} - Measures :} provides a solid background on semantic similarity and distance measures. We explore different metrics illustrating their pro/cons with examples.
+\item\textbf{Chapter~\ref{chapter:Disambiguation} - Disambiguation :} reviews the literature and assesses the most relevant ways to disambiguate a list of keywords which may be organize into sentences or not. 
+\item\textbf{Chapter~\ref{chapter:ExistingServices} - Existing Approaches :} describes existing image annotation approaches as well as their architecture.
+\item\textbf{Chapter~\ref{chapter:SotAConclusion} - State of the Art Conclusion :} summarizes the findings of the previous state of the art and opens the way to the presented contribution.
 \item\textbf{Chapter~\ref{chapter:Methodology} - Proposed Methodology :} presents the chosen methodology as well as some organizational points.
 \item\textbf{Chapter~\ref{chapter:Architecture} - Proposed Architecture :} details the technological choices by comparing them to their competitors and the chosen DBMS schema. Illustration figures will be presented.
-\item\textbf{Chapter~\ref{chapter:Experiments} - Proposed Architecture :} presents the chosen dataset, details some of the main algorithms and reviews the tests' results with the use of different evaluation methods.
+\item\textbf{Chapter~\ref{chapter:Experiments} - Experiments :} presents the chosen dataset, details some of the main algorithms and reviews the tests' results with the use of different evaluation methods.
 \item\textbf{Chapter~\ref{chapter:ContributionConclusion} - Contribution Conclusion :} summarize the findings of the presented research problem.
 \end{description}

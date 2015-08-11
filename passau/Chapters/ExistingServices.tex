@@ -1,10 +1,10 @@
 %!TEX root = ../thesis.tex
 
-\chapter{Existing services} % Main chapter title
+\chapter{Existing approaches} % Main chapter title
 
 \label{chapter:ExistingServices} % Change X to a consecutive number; for referencing this chapter elsewhere, use \ref{ChapterX}
 
-\lhead{Chapter 5 \emph{Existing services}} % Change X to a consecutive number; this is for the header on each page - perhaps a shortened title
+\lhead{Chapter 5 \emph{Existing approaches}} % Change X to a consecutive number; this is for the header on each page - perhaps a shortened title
 
 We found in the literature lot of research which talk about multimedia tagging/annotation/labelling. These papers mainly use both the visual multimedia information (low-level features) and the textual information they might have at disposal (high-level features, meta-data). A review of the existing tagging-based applications is propose by Wand and al. in \cite{wang2012assistive}.\\
 These works aren't our main focus, here we will present textual-only tagging approaches.
@@ -12,6 +12,7 @@ These works aren't our main focus, here we will present textual-only tagging app
 \section{Mixing Statistics and WordNet} % (fold)
 \label{sec:mixing_statistics_and_wordnet}
 In \cite{jin2005image}, Jin and al. propose the integration of the WordNet (\ref{sub:wordnet}) semantic resource in a statistic-based annotation process in order to remove irrelevant keywords.\\
+
 Their algorithm is organized as follows : they first generate a set of keywords with the help of a statistical model called \emph{Translation Model} (TM). Some of those candidates tags are relevant and some aren't.\\
 In order to filter the irrelevant ones, they then compute several semantic similarity measures : 
 \begin{enumerate}
@@ -20,6 +21,7 @@ In order to filter the irrelevant ones, they then compute several semantic simil
 	\item Banerjee and Pedersen - see \cite{banerjee2003extended}
 \end{enumerate}
 Finally, they combine these metrics using Dempster-Shafer Theory (\cite{shafer1976mathematical}) and the keywords with a resulting score under a chosen threshold are removed. Detailed method steps are presented in the original paper. \\
+
 Concerning their results, they compare their \emph{TMHD} proposed approach with a basic TM process. Based on a set of most frequently used keywords, they found that, on average, precisions values of TM and TMHD are respectively 14.21\% and 33.11\%. This indicates that TMHD is 56.87\% better than TM. It is interesting to note that the recall score stays the same due to the fact that only irrelevant keywords are removed. They also compare \emph{TMHD} to the use of individual measures with TM and the results aren't as good as those from their combination.\\
 These results show the power of knowledge-based data and similarity measures when it's added to a statistical model.
 % section mixing_statistics_and_wordnet (end)
@@ -27,7 +29,9 @@ These results show the power of knowledge-based data and similarity measures whe
 \section{Graph-cut based enrichment} % (fold)
 \label{sec:graph_cut_based_enrichment}
 In \cite{qian2011graph}, Qian and Hua expose their graph-based approach of the tag enrichment process. They represent each initial tag of their corpus as a node and interlink them (using \emph{n-links}). The weight of those n-links can be seen as the similarity between the two linked nodes, computed by the help of the Google distance \cite{cilibrasi2007google}. They add two virtual nodes called \emph{sink} and \emph{source}. Then, they link all nodes to one of these virtual nodes using \emph{t-links}.\\
+
 The aim of their approach is to split all the tags into two distinct sets S (containing the source node) and T (containing the sink one) by assigning the labels s (source) if the tag is relevant to the image and t (sink) if not to the nodes. Then, they determine how many tags are relevant to the image by solving the combinational optimization problem through the graph.\\
+
 This paper is really short and not very clear but it gives good ideas about the tags' representation as a graph and how to interlink them. According to the authors, the results are satisfactory.   
 % section graph_cut_based_enrichment (end)
 
@@ -48,6 +52,8 @@ This phase consist of the identification of the relation between two tags \emph{
 	\item Instance Of relation : \emph{T1} instanceOf \emph{T2}
 \end{itemize}
 These relations can be found by two ways : a relation can be declared within an ontology or, if no ontology contain such relation, one is made by crossing knowledge from different ontologies.\\
-The author the present different experiments as well as some issues rose during this phase. One in particular is important to keep in mind : when users tags resources, especially pictures, they tend to tag them with specific vocabulary, mainly instances rather than \emph{abstract} concepts. This can result on lot of \say{semantic noise} : tags which can't be match with concepts from online ontologies.\\
+
+The author then present different experiments as well as some issues rose during this phase. One in particular is important to keep in mind : when users tags resources, especially pictures, they tend to tag them with specific vocabulary, mainly instances rather than \emph{abstract} concepts. This can result on lot of \say{semantic noise} : tags which can't be match with concepts from online ontologies.\\
+
 This paper is really interesting and approaches the topic in a very general point of view, which ensure the flexibility of its implementation. We will see in \ref{chapter:Methodology} that this method perfectly adapt to our study. 
 % section enrich_folksonomy_tag_space (end)
