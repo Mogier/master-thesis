@@ -1,9 +1,51 @@
+%!TEX root = ./main.tex
 \section{Contribution} % (fold)
 \label{sec:contribution}
 
 \subsection{Architecture} % (fold)
 \label{sub:architecture}
+In order to support the method presented in \ref{sub:method} some technology choices were made. In this section we will present the most important of them and especially detail the structure of our graph-based data model.
+\subsubsection{Technologies} % (fold)
+\label{ssub:technologies}
+\paragraph{Java Language} % (fold)
+\label{par:java_language}
+Java is a general-purpose computer programming language that is concurrent, class-based, object-oriented, and specifically designed to have as few implementation dependencies as possible. It is also a cross-platform language which means that it would be possible to use it without any recompilation needed. Java is very easy to use, well documented a has the support of a large community (more than 9 million developers reported). Therefore, lot of libraries are available, we will present some of them below. 
+% paragraph java_language (end)
+\paragraph{Neo4j} % (fold)
+\label{par:neo4j}
+Graph-based databases are very intuitive to work with and allow the user to model the world as he experience it. The model schema isn't rigid and the user can edit it at anytime, adding new entities or new kind of relationships. Neo4j is an open-source graph database, implemented in Java (so cross-platform), maturing for 15 years and currently running version 2.2. It is the most popular graph database nowadays\footnote{http://db-engines.com/en/ranking/graph+dbms}, has a great scalability, a strong community and has its own query language : Cypher. 
+% paragraph neo4j (end)
+\paragraph{Semantic Resources Libraries} % (fold)
+\label{par:semantic_resources_libraries}
+We needed to access the chosen online ontologies (DBpedia's and WordNet's) from our prototype. To achieve this, we used the fact that Java is very popular and lot of libraries are available.\\
+We chose Apache JENA ARQ\footnote{https://jena.apache.org/documentation/query/index.html} to query the RDF-base schema of DBpedia. This solution is stable and maintained by a famous structure : Apache. Using it was really simple.\\
+Regarding WordNet, we used JAWS\footnote{http://lyle.smu.edu/~tspell/jaws/} which has been developed and is maintain by a member of the Southern Methodist University (Dallas, Texas). Its last version is a bit old but this isn't an issue since WordNet's upgrades have also stopped. This library was also deeply intuitive and easy to use.
+% paragraph semantic_resources_libraries (end)
+\paragraph{JSoup} % (fold)
+\label{par:jsoup}
+Our two last experiments are based on Wikipedia's web-pages. Therefore we needed a way to crawl and extract content from them. The JSoup\footnote{http://jsoup.org/} library was a perfect asset to achieve this. It is open-source, implements the WHATWG HTML5 specification, and parses HTML to the same DOM as modern browsers do. It also allows the user to build specific queries to access particular elements in the DOM.
+% paragraph jsoup (end)
+\paragraph{Stanford NLP} % (fold)
+\label{par:stanford_nlp}
+Crawling web-pages is a thing, but extracting relevant data from it is another one. The Stanford NLP Research Group\footnote{http://nlp.stanford.edu/} has released several libraries in different programming languages including Java. Those libraries can achieve many things such as sentence segmentation, Part-of-speech (POS) tagging, named entities recognition and so on\dots We used the POS Tagger to extract nouns from Wikipedia paragraphs.
+% paragraph stanford_nlp (end)
+% subsubsection technologies (end)
 
+\subsubsection{Graph Structure} % (fold)
+\label{ssub:graph_structure}
+\paragraph{Vertexes} % (fold)
+\label{par:vertexes}
+
+% paragraph vertexes (end)
+\paragraph{Edges} % (fold)
+\label{par:edges}
+
+% paragraph edges (end)
+\paragraph{Pro-Cons} % (fold)
+\label{par:pro_cons}
+
+% paragraph pro_cons (end)
+% subsubsection graph_structure (end)
 % subsection architecture (end)
 
 \subsection{Experiments} % (fold)
