@@ -33,17 +33,34 @@ Crawling web-pages is a thing, but extracting relevant data from it is another o
 
 \subsubsection{Graph Structure} % (fold)
 \label{ssub:graph_structure}
+The graph built through the algorithm we developed is an acyclic, directed graph. Its vertexes and edges come from our two chosen semantic resources.
 \paragraph{Vertexes} % (fold)
 \label{par:vertexes}
-
+Each vertex represents a semantic concept (virtual or real).\\
+Virtual ones are concepts created in purpose to perform operations. Here we’re talking about 2 different kinds of nodes :
+\begin{description}
+	\item[Base concepts] those are created in order to represent the originals tags. Their URIs follow this pattern : “base:TAG” (ex : base:dog)
+	\item[Top/Bottom concepts] these two concepts (virtual:top and virtual:bottom) are essential in the compuation of the Wu-Palmer evolved measure (see \ref{par:wu_palmer_evolved}).
+\end{description}
+Real nodes are semantic nodes linked to semantic entities, classes (DBpedia) or synsets (WordNet) :
+\begin{description}
+	\item[WordNet's nodes pattern] “Wordnet:TAG” (ex: Wordnet:plant)
+	\item[DBpedia's nodes pattern] “DPedia’s concept URI” (ex: http://dbpedia.org/resource/London)
+\end{description}
 % paragraph vertexes (end)
 \paragraph{Edges} % (fold)
 \label{par:edges}
-
+There are 3 kind of edges :
+\begin{description}
+	\item[VIRTUAL] represent virtual links between nodes, not present in any of the semantic resources, created by the algorithm
+	\item[EQUIV] represent an equivalence between nodes from 2 different ontologies (ex : http://dbpedia.org/resource/Dog and Wordnet:dog)
+	\item[PARENT] represent a semantic link which is of type “is-a” (implemented by the rdfs:subClassOf predicate in DBpedia and the hyperonym/holonym relation in WordNet)
+\end{description}
 % paragraph edges (end)
 \paragraph{Pro-Cons} % (fold)
 \label{par:pro_cons}
-
+This graph-based model approach has several benefits : it is more intuitive to imagine the inheritance of a concept, the computation of basic metrics such as shortest path between two concepts or their mLowest Common Subsumer (LCS) is really easy, the schema isn't rigid and has, in fact, evolved during the project \dots\\
+However, our choice also has drawbacks : No disambiguation system has been implemented which means that all parents of a node are added to the graph making it always bigger and slower to browse. Given the graph's size and my machine performances, the integration of the Wu-Palmer evolved measure wasn't possible (but implemented and tested on smaller graphs).
 % paragraph pro_cons (end)
 % subsubsection graph_structure (end)
 % subsection architecture (end)

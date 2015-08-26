@@ -37,8 +37,8 @@ Two main technologies are used for the development of the Semantic Web : eXtensi
 The third basic component of the Semantic Web are collections of information called ontologies. An ontology is, in computer science, a document which defines the relations among concepts. Basically, Web ontologies are composed of a taxonomy, which defines classes of objects and their relations, and a set of inference rules.\\
 % subsubsection semantic_web (end)
 
-\subsubsection{Similarity Measures} % (fold)
-\label{ssub:similarity_measures}
+\subsubsection{Semantic Resources} % (fold)
+\label{ssub:semantic_resources}
 \paragraph{DBpedia} % (fold)
 \label{par:dbpedia}
 DBpedia\footnote{http://wiki.dbpedia.org/} is a project originally launched by two German universities (Berlin and Leipzig) and backed by an important community. It explores Wikipedia\footnote{https://en.wikipedia.org/} and extract information from it which results on the creation of a multilingual, large-scale knowledge base. The extraction framework, all the available end-points as well as some facts and figures about the project are presented in \cite{lehman}.\\
@@ -61,21 +61,24 @@ This resource is useful if we are searching for entities. Since the maximal dept
 
 It exists several ways to browse this resource. An online interface allows the user to manually query the dataset and to navigate in it through hyperlinks. For software and research purposes, the user has to download one of the released version of WordNet's dataset as well as a specific library according to the code language he's using.\\
 % paragraph wordnet (end)
+% subsubsection semantic_resources (end)
+
+\subsubsection{Similarity Measures} % (fold)
+\label{ssub:similarity_measures}
+\paragraph{Shortest Path} % (fold)
+\label{par:shortest_path}
+This measure is in fact a simple node-counting scheme (path). The similarity score is inversely proportional to the number of nodes along the shortest path between the concepts. The shortest possible path occurs when the two concepts are the same, in which case the length is 1. Thus, the maximum similarity value is 1.\\
+One has to be very careful with the use of this metric because it initially doesn't take into account neither the kind of relations nor their direction. Therefore, two concepts which are hierarchically related may be as similar as two leafs.
+% paragraph shortest_path (end)
+\paragraph{Wu-Palmer evolved} % (fold)
+\label{par:wu_palmer_evolved}
+In \cite{zara}, Zargayouna exposes a consequence of the Wu-Palmer formula which can, according to the context of use, gives false results. Indeed, in Wu-Palmer, the similarity between two concepts is related to their distance to the LCS. Therefore, the more \say{general} the LCS is, the less similar the concepts (and inversely). This can be an issue if one want to give an advantage to the father-child relation instead of the brother-brother one. \\
+
+In order to achieve what's mentioned above, the author create a virtual bottom node to which every leaf node is linked. Then, she integrates in the equation the maximum number of edges between this virtual node and the LCS as well as the number of edges between the LCS and each of the considered concepts. \\
+
+It is important to note that this modification of the Wu-Palmer formula rest on the fact that dist(LCS,c) can be null if one of the concepts is the LCS which occurs in the father-child relation. In this case, the third part of the denominator becomes null and the similarity is the same as in Wu-Palmer. In the brother-brother relation yet, this part isn't null and the similarity decrease.
+% paragraph wu_palmer_evolved (end)
 % subsubsection similarity_measures (end)
-
-\subsubsection{Existing approaches} % (fold)
-\label{ssub:existing_approaches}
-
-\paragraph{Mixing Statistics and Wordnet} % (fold)
-\label{par:mixing_statistics_and_wordnet}
-In \cite{jin}, Jin and al. propose the integration of the WordNet (\ref{par:wordnet}) semantic resource in a statistic-based annotation process in order to remove irrelevant keywords.\\
-
-Their algorithm is organized as follows : they first generate a set of keywords with the help of a statistical model called \emph{Translation Model} (TM). Some of those candidates tags are relevant and some aren't.\\
-In order to filter the irrelevant ones, they then compute several semantic similarity measures (Lin, Jiang and Conrath and Banerjee and Pedersen). Finally, they combine these metrics using Dempster-Shafer Theory (\cite{shafer}) and the keywords with a resulting score under a chosen threshold are removed. Detailed method steps are presented in the original paper. \\
-
-Concerning their results, they compare their \emph{TMHD} proposed approach with a basic TM process. Based on a set of most frequently used keywords, they found that, on average, precisions values of TM and TMHD are respectively 14.21\% and 33.11\%. This indicates that TMHD is 56.87\% better than TM. It is interesting to note that the recall score stays the same due to the fact that only irrelevant keywords are removed. They also compare \emph{TMHD} to the use of individual measures with TM and the results aren't as good as those from their combination.\\
-These results show the power of knowledge-based data and similarity measures when it's added to a statistical model.
-% paragraph mixing_statistics_and_wordnet (end)
 
 \paragraph{Graph-cut based enrichment} % (fold)
 \label{par:graph_cut_based_enrichment}
