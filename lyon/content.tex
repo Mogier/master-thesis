@@ -1,4 +1,5 @@
 %!TEX root = ./main.tex
+
 \section{Contribution} % (fold)
 \label{sec:contribution}
 
@@ -38,28 +39,37 @@ The graph built through the algorithm we developed is an acyclic, directed graph
 \label{par:vertexes}
 Each vertex represents a semantic concept (virtual or real).\\
 Virtual ones are concepts created in purpose to perform operations. Here we’re talking about 2 different kinds of nodes :
-\begin{description}
-	\item[Base concepts] those are created in order to represent the originals tags. Their URIs follow this pattern : “base:TAG” (ex : base:dog)
-	\item[Top/Bottom concepts] these two concepts (virtual:top and virtual:bottom) are essential in the compuation of the Wu-Palmer evolved measure (see \ref{par:wu_palmer_evolved}).
-\end{description}
-Real nodes are semantic nodes linked to semantic entities, classes (DBpedia) or synsets (WordNet) :
-\begin{description}
-	\item[WordNet's nodes pattern] “Wordnet:TAG” (ex: Wordnet:plant)
-	\item[DBpedia's nodes pattern] “DPedia’s concept URI” (ex: http://dbpedia.org/resource/London)
-\end{description}
+\begin{itemize}
+	\item Base concepts : those are created in order to represent the originals tags. Their URIs follow this pattern : “base:TAG” (ex : base:dog) and their \emph{TAG} value is lemmatized (dogs -$>$ dog).
+	\item Top/Bottom concepts : these two concepts (virtual:top and virtual:bottom) are essential in the compuation of the Wu-Palmer evolved measure (see \ref{par:wu_palmer_evolved}).
+\end{itemize}
+Real nodes are semantic nodes linked to entities, classes (DBpedia) or synsets (WordNet) :
+\begin{itemize}
+	\item WordNet's nodes pattern : “Wordnet:TAG” (ex: Wordnet:plant)
+	\item DBpedia's nodes pattern : “DPedia’s concept URI” (ex: http://dbpedia.org/resource/London)
+\end{itemize}
 % paragraph vertexes (end)
 \paragraph{Edges} % (fold)
 \label{par:edges}
 There are 3 kind of edges :
-\begin{description}
-	\item[VIRTUAL] represent virtual links between nodes, not present in any of the semantic resources, created by the algorithm
-	\item[EQUIV] represent an equivalence between nodes from 2 different ontologies (ex : http://dbpedia.org/resource/Dog and Wordnet:dog)
-	\item[PARENT] represent a semantic link which is of type “is-a” (implemented by the rdfs:subClassOf predicate in DBpedia and the hyperonym/holonym relation in WordNet)
-\end{description}
+\begin{itemize}
+	\item VIRTUAL : represent virtual links between nodes, not present in any of the semantic resources, created by the algorithm
+	\item EQUIV : represent an equivalence between nodes from 2 different ontologies \\
+	(ex : http://dbpedia.org/resource/Dog and Wordnet:dog)
+	\item PARENT : represent a semantic link which is of type “IS-A” (implemented by the rdfs:subClassOf predicate in DBpedia and the hyperonym/holonym relation in WordNet)
+\end{itemize}
 % paragraph edges (end)
+\paragraph{Construction} % (fold)
+\label{par:construction}
+Now that we have described our graph, we will present how it is built.\\
+Given an initial set of input tags, the first step of our construction process is to detect semantic concepts among them. To achieve this, we use DBpedia Spotlight (shortly presented above) and its REST endpoint. It takes as input a string (here the list of tags, separated by commas) and returns a JSON object containing detected semantic concepts, see Appendix \ref{app:spotlight} for a sample response. We then use the JAWS library and request all input tags to our WordNet database. This returns us a list of synsets.\\
+We have now to create the hierarchical tree for each of this base concepts and stop when we reach the ontology's root. In order to do so, we again split the task according to the ontology the concept comes from. For DBpedia's, we send the SPARQL requests of Appendix \ref{app:sparql_requests} through the JENA library. Code \ref{code:entity} if the resource is an entity and we need to find its class. Code \ref{code:class} if the resource is a class and we so need to find it's superclass.\\
+It is a bit more simple with the WordNet's concepts. Since we have the initial synsets, we can easily navigate into them and extract hypernyms.\\
+The last step of our process is the detection of equivalences. To do so we start from the DBpedia's nodes, get their label and request WordNet. If a correspondence is found, then we create the equivalent node, interlink it via an EQUIV edge to the initial one and build its generalization tree as presented above.
+% paragraph construction (end)
 \paragraph{Pro-Cons} % (fold)
 \label{par:pro_cons}
-This graph-based model approach has several benefits : it is more intuitive to imagine the inheritance of a concept, the computation of basic metrics such as shortest path between two concepts or their mLowest Common Subsumer (LCS) is really easy, the schema isn't rigid and has, in fact, evolved during the project \dots\\
+This graph-based model approach has several benefits : it is more intuitive to imagine the inheritance of a concept, the computation of basic metrics such as shortest path between two concepts or their Least Common Subsumer (LCS) is really easy, the schema isn't rigid and has, in fact, evolved during the project \dots\\
 However, our choice also has drawbacks : No disambiguation system has been implemented which means that all parents of a node are added to the graph making it always bigger and slower to browse. Given the graph's size and my machine performances, the integration of the Wu-Palmer evolved measure wasn't possible (but implemented and tested on smaller graphs).
 % paragraph pro_cons (end)
 % subsubsection graph_structure (end)
@@ -67,13 +77,79 @@ However, our choice also has drawbacks : No disambiguation system has been imple
 
 \subsection{Experiments} % (fold)
 \label{sub:experiments}
+As previously said, we implemented five experiments : three are based on our graph and two directly use the content of Wikipedia's pages. We will now present their implementation, the results we got and discuss them.
 \subsubsection{Implementation Explanation} % (fold)
 \label{ssub:implementation_explanation}
-
+\paragraph{WholeList -- WL} % (fold)
+\label{par:wholelist_wl}
+The two first experiments, WL and SL, are based on the same algorithm of candidates detection. This algorithm make use of Breadth-First search (BFS) traversers in order to browse the graph starting from the initial tags' nodes. The BFS code is available on Appendix \ref{app:bfs} and the candidates detection algorithm on Appendix \ref{app:newTagsList}.\\
+The difference between WL and SL is located line 26 of Code \ref{code:newtags} : the score computation function doesn't take the same things into account. Let's detail this.\\
+In the WL experiment, we compute a global score using all the initial tags (Whole List). This global score is composed of all the score between the considered candidate and the initial nodes as below :
+\begin{equation}
+\label{eq:wholeList}
+globalScore(currentNode) = \sum_{0\le n< nbNodes} \frac{1}{score(currentNode, nodes(n))^k}
+\end{equation}
+The $score$ function can be one of the measures we presented in \ref{ssub:similarity_measures}, due to computer performances, we had to go with the Shortest Path distance. $k$ is a chosen integer which has for consequence to favor (or not) really close nodes.
+% paragraph wholelist_wl (end)
+\paragraph{SubLists -- SL} % (fold)
+\label{par:sublists_sl}
+The SL experiment is based on the same approach than his brother WL. The difference is that, when it comes to global score computing, we only take into account a determined number of initial nodes. This results on a small modification of the algorithm : before any global score calculation we store all the $score$ results and only use some of them in equation \eqref{eq:wholeList}. This has for consequence that the very far nodes don't pollute our results by inserting noise. 
+% paragraph sublists_sl (end)
+\paragraph{DirectNeighbors -- DN} % (fold)
+\label{par:directneighbors_dn}
+This last graph-based experiment version is more direct : we search for direct neighbors of the input nodes. In concrete terms, for each of the input nodes, we store all the parents nodes with a maximal distance of 2. We count how many times each parent is found and return the most frequent ones. This method is expected to give good results when the initial tags are close semantically speaking (boat, sea, sail \dots) but can return abstract results in the case of a very diverse set of tags, and even more if this set is small.
+% paragraph directneighbors_dn (end)
+\paragraph{WikiLinks} % (fold)
+\label{par:wikilinks}
+We will now present the last two experiments which are directly based on the content of Wikipedia's pages, extracted with the help of the JSoup library. The process is basically the same, we search for wikipedia's pages matching the URL \emph{https://en.wikipedia.org/wiki/+TAG}, if found we extract the content from the first paragraph and then operate the candidate detection step.\\
+For the WikiLinks experiment, we only care about internal links (called wikilinks). We access them using CSS queries :
+\begin{itemize}
+	\item Access the 1st paragraph : \emph{div\#mw-content-text $>$ p}
+	\item Access wikilinks : \emph{a[href~=/wiki/(?!Help:)(?!File:)(?!Wikipedia:)]}
+\end{itemize}
+Here again, we store each of the links and sum its occurrences, we then propose as final candidates the most frequent ones.
+% paragraph wikilinks (end)
+\paragraph{WikiContent} % (fold)
+\label{par:wikicontent}
+The WikiContent expriment is very similar to the WikiLinks one. The difference is that we consider here all the nouns in the first paragraph of the Wikipedia's page. In order to achieve this, we extract the first paragraph with the same CSS query presented above and then parse its content using the NLP library. The Part-of-speech module gives us a list of tokens as well as their POS label (see Appendix \ref{app:pos} for the complete list of POS labels) and we then only keep the nouns (NN* labels : common and proper nouns, singular and plural).\\
+Here again, we store each of the links and sum its occurrences, we then propose as final candidates the most frequent ones.
+% paragraph wikicontent (end)
 % subsubsection implementation_explanation (end)
 \subsubsection{Results and Analysis} % (fold)
 \label{ssub:results_and_analysis}
+Our experiments have been made using a database of images pulled out the website Flickr\footnote{https://www.flickr.com/}. This base is composed of 10261 distinct unique tags, 55600 images, initially annotated with an average number of tags of 17.69, see Appendix \ref{app:statsDB} for the top 20 used tags.\\
+For the purpose of our tests, we created a graph based on 1350 images. This gave a graph which contains 5212 nodes and 7552 relations (1612 VIRTUAL, 2339 EQUIV, 3592 PARENT). Thanks to the Gephi software\footnote{http://gephi.github.io/}, we were able to compute some statistics about our network and we learned that the diameter of our graph is of 20 and the average path length between two nodes is of 6.64.
+Two methods have been set in order to evaluate the results of our tests launched on 100 images with an initial set of tags of at least 7 items.\\
 
+First, for the three graph-based experiments, we were able to compute a distance metric between a removed percentage (30\%) of the initial tags and the candidates. This distance have been evaluated on a substantial number of test images (100). The average distance results are presented in Table \ref{table:avgDist}.
+\begin{table}[p]
+\centering
+\begin{tabular}{lll}
+\cline{1-3}
+\multicolumn{1}{|l|}{{\bf WL}} & \multicolumn{1}{l|}{{\bf SL}} & \multicolumn{1}{l|}{{\bf DN}} \\ \cline{1-3}
+\multicolumn{1}{|l|}{3.95}     & \multicolumn{1}{l|}{3.90}     & \multicolumn{1}{l|}{3.55} \\ \cline{1-3}
+\end{tabular}
+\caption{Average distance between removed tags and candidates}
+\label{table:avgDist}
+\end{table}
+We observe that the DN experiment has better results than the list-based ones. These are really close and this can be explained by the fact that their candidates are often the same but in a different order. These results are pretty good since our diameter (ie the longest shortest path between two nodes in our graph) is of 20.\\
+
+The second method is an user-based evaluation, we asked several individuals to rate the generated candidates regarding the image and the initial tags. They were given a HTML file with 5 images to evaluate (see Appendix \ref{app:sample_image_to_evaluate} for an example of one) and a CSV file to write their evaluation. The question they had to answer was \emph{Does this tag describe the image ?} and they had to rate each tag on a scale of 1 (\emph{Strongly Agree}) to 5 (\emph{Strongly Disagree}) with an \emph{Undecided} option (3). Each person only evaluated one experiment (WL, SL, DN, WikiLinks or WikiContent) and each experiment was evaluated by different people. We concatenated the results and computed several statistics presented in Table \ref{table:userEval}.\\
+
+\begin{table}[p]
+\centering
+\begin{tabular}{|c|c|c|c|c|c|}
+\hline
+{\bf } & {\bf WL} & {\bf SL} & {\bf DN} & {\bf WikiLinks} & {\bf WikiContent} \\ \hline
+{\bf Avg.  global rating} & 3.30 & 3.29 & 3.09 & 3.25 & 2.55 \\ \hline
+{\bf Avg. 1st candidate rating} & 2.70 & 2.33 & 2.73 & 3.13 & 1.93 \\ \hline
+{\bf Avg. 2nd candidate rating} & 3.45 & 2.96 & 3.6 & 2.67 & 2.19 \\ \hline
+{\bf Avg. 3rd candidate rating}  & 3.15 & 3.33 & 3.13 & 2.53 & 2.82 \\ \hline
+\end{tabular}
+\caption{User-evaluation results}
+\label{table:userEval}
+\end{table}
+These results are interesting, it is very clear that the WikiContent experiment is the better one and among the graph-based ones, the DN experiment seems to be the more promising. We also wanted to see if the theory in which the firsts tags are the better ones was correct, and we can't really conclude anything based on these results since no rule seems to apply (only SL and WikiContent follow this pattern). In average, the global rating is around 3, which isn't bad but isn't so good as well. More has to be done in order to enhance our prototype.
 % subsubsection results_and_analysis (end)
 % subsection experiments (end)
 
@@ -81,7 +157,13 @@ However, our choice also has drawbacks : No disambiguation system has been imple
 
 \section{Perspectives} % (fold)
 \label{sec:perspectives}
-Add new resources
-Work with other similarity distances
+Our experiments show promising results but it is important to notice that we only propose candidates that have a higher level of abstraction than our initial tags. This is explain by the fact that we "climb" the graph and never travel in the other direction. This can be a way to improve this work : given "general" candidates, it might be interesting to search in their specializations for good tags.\\
+New resources could also be added to this work, like Geonames\footnote{http://www.geonames.org/} for instance which provides nice services to detect geographic entities. \\
+It might also be interesting to use other similarities measures, we were limited to the use of the Shortest Path length due to machine's performances.
 
 % section perspectives (end)
+\section{Conclusion} % (fold)
+\label{sec:conclusion}
+In this study, we reviewed the literature about the semantic web and its technologies as well as the existing approaches for semantic enrichment. We then proposed a prototype which detect candidates tags for an image given an initial set of annotations. Experiments were made and their results were evaluated by two ways and then discussed. Eventually we presented some perspectives about this topic.\\
+This project was a really nice experience. It allowed me to discover the research environment and some new technologies such as the semantic web, the SPARQL language or the graph-based databases. The fact that I worked alone on it was a great challenge to myself and I'm happy to see that some interesting results showed up.\\
+% section conclusion (end)

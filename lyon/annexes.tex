@@ -1,0 +1,99 @@
+%!TEX root = ./main.tex
+\section{BFS code}
+\label{app:bfs}
+\lstinputlisting[language=Java,caption=Java BFS implementation,label={code:bfs}]{./prim/BFS.java}
+
+\newpage
+
+\section{Lists-based candidates detection algorithm}
+\label{app:newTagsList}
+\lstinputlisting[language=Java,caption=Candidates detection algorithm,label={code:newtags}]{./prim/newTags.java}
+
+\newpage
+
+\section{NLP Part-of-speech labels}
+\label{app:pos}
+\begin{enumerate}
+  \item CC Coordinating conjunction
+  \item CD Cardinal number
+  \item DT Determiner
+  \item EX Existential there
+  \item FW Foreign word
+  \item IN Preposition or subordinating conjunction
+  \item JJ Adjective
+  \item JJR Adjective, comparative
+  \item JJS Adjective, superlative
+  \item LS List item marker
+  \item MD Modal
+  \item NN Noun, singular or mass
+  \item NNS Noun, plural
+  \item NNP Proper noun, singular
+  \item NNPS Proper noun, plural
+  \item PDT Predeterminer
+  \item POS Possessive ending
+  \item PRP Personal pronoun
+  \item PRP\$ Possessive pronoun
+  \item RB Adverb
+  \item RBR Adverb, comparative
+  \item RBS Adverb, superlative
+  \item RP Particle
+  \item SYM Symbol
+  \item TO to
+  \item UH Interjection
+  \item VB Verb, base form
+  \item VBD Verb, past tense
+  \item VBG Verb, gerund or present participle
+  \item VBN Verb, past participle
+  \item VBP Verb, non 3rd person singular present
+  \item VBZ Verb, 3rd person singular present
+  \item WDT Whdeterminer
+  \item WP Whpronoun
+  \item WP\$ Possessive whpronoun
+  \item WRB Whadverb
+\end{enumerate}
+
+\newpage
+
+\section{DBpedia Spotlight response sample}
+\label{app:spotlight}
+\lstinputlisting[language=json,caption=Sample response,label={code:spotlight}]{./prim/sampleDBpediaSpotlight.json}
+
+\section{SPARQL requests} % (fold)
+\label{app:sparql_requests}
+\lstinputlisting[language=SPARQL,caption=Find entity's class,label={code:entity}]{./prim/entity.sparql}
+\lstinputlisting[language=SPARQL,caption=Find class' superclass,label={code:class}]{./prim/class.sparql}
+% section sparql_requests (end)
+
+\newpage
+
+\section{Flickr DB top used tags}
+\label{app:statsDB}
+\begin{enumerate}
+  \item photography : 55002
+  \item colour image : 49734
+  \item outdoors : 49129
+  \item no people : 44892
+  \item day : 37337
+  \item sky : 23964
+  \item travel destinations : 17713
+  \item cloud : 16906
+  \item tree : 12890
+  \item scenics : 12134
+  \item tranquility : 11668
+  \item tranquil scene : 10526
+  \item landscape : 10303
+  \item building exterior : 9941
+  \item beauty in nature : 9686
+  \item people : 8198
+  \item sea : 8197
+  \item capital cities : 8144
+  \item close-up : 8083
+  \item reflection : 7393
+\end{enumerate}
+
+\newpage
+
+\section{Sample image to evaluate} % (fold)
+\label{app:sample_image_to_evaluate}
+\includegraphics[scale=0.6]{./prim/exampleEval}
+% section sample_image_to_evaluate (end)

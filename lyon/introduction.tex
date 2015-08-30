@@ -3,24 +3,18 @@
 \subsection{Context} % (fold)
 \label{sub:context}
 This PFE was done in the context of the double master degree Informatique - Information und Kommunikation (IFIK), which brings together two Master programs : a degree in computer engineering at the National Institute of Applied Sciences in Lyon (INSA Lyon) and a Master in Informatik (Schwerpunkt : Information und Kommunikationssysteme) at the University of Passau.\\
-
-I realised my project at the University of Passau during the last semester of my 5th year of study. During these 6 months, I had the amazing opportunity to discover the way of study in Germany and the organization of the University of Passau. There are 12,000 students in Passau (for 50,000 inhabitants) and \textbf{XXX} study computer science. The FIM faculty (Fakültät für Informatik und Mathematik) is composed of \textbf{XXX} chairs, I was part of Pr. Kosch's which currently employ \textbf{XXX} master students and \textbf{XXX} doctors students from different countries (one of the student I shared the office with was from Tunisia).\\
-
-I worked on my own on this project under the supervision of two tutors, Dr. David Coquil on the german side and Dr. Elöd Egyed-Zsigmond on the french side. They were a precious help during the whole PFE process in term of advices and suggestions of work.
+I realised my project at the University of Passau during the last semester of my 5th year of study. During these 6 months, I had the amazing opportunity to discover the way of study in Germany and the organization of the University of Passau. There are 12,000 students in Passau (for 50,000 inhabitants) and 600 study computer science. The FIM faculty (Fakültät für Informatik und Mathematik) is composed of 24 chairs, I was part of Pr. Kosch's which employ master and doctors students from different countries (one of the student I shared the office with was from Tunisia).\\
+I worked on my own on this project under the supervision of two tutors, Dr. David Coquil on the German side and Dr. Elöd Egyed-Zsigmond on the French side. They were a precious help during the whole PFE process in term of advices and suggestions of work.
 % subsection context (end)
 
 \subsection{Background} % (fold)
 \label{sub:background}
 
 Image is a popular medium nowadays : it is easy to capture, can be really light on your electronic device and speaks to everyone without distinction of language.\\
-
 The huge production and consumption of images implies the need of an efficient way to store and search for the relevant one when the time comes. The best illustration to this need is to think of the nice but long moments one had with its relatives searching for the good picture of the new-born nephew in the family pictures album.\\
-
-Since an image itself doesn't have a natural plain-text representation the best way to describe it is to add meta-data (data about the data) such as its date of creation, its dimensions or, and this is what this thesis is about, some tags.\\
-
+Since an image itself doesn't have a natural plain-text representation the best way to describe it is to add meta-data (data about the data) such as its date of creation, its dimensions or, and this is what this project is about, some tags.\\
 There are a lot of ways if one wants to annotate pictures. We can do it manually, using our own words (like \say{Dad}, \say{Home} \dots), we can also analyze the raw picture, its pixel representation and compare some metrics (like the color histogram) to sample images in order to detect known concepts. Moreover, if the image already possesses annotations, we can enrich it semantically. \\
-
-This field is so wide that it is impossible to speak about all the possibilities and technologies. In this study, we will focus on the last point and investigate the automation of the semantic enrichment. We will study the resources at our disposal and propose a solution keeping in mind the facts cited previously.\\
+This field is so wide that it is impossible to speak about all the possibilities and technologies. In this study, we will focus on the last point and investigate the automation of the semantic enrichment. We will study the resources at our disposal and propose a solution keeping in mind the facts cited previously.
 % subsection background (end)
 
 \subsection{State of the Art} % (fold)
@@ -29,12 +23,9 @@ This field is so wide that it is impossible to speak about all the possibilities
 \subsubsection{Semantic Web} % (fold)
 \label{ssub:semantic_web}
 Linguistic semantics is the study of meaning that is used for understanding human expression through language. It is easy for two human-being to communicate (given that they speak the same language) and to understand what their partner say even if he's using a tricky turn of phrase. However, this task becomes way more difficult when it comes to the comprehension of the human language by a machine. How can the computer guess that \say{I am totally dead} means in fact \say{I am really tired} and that the speaker isn't actually dead ? Machines need structured resources to understand us and the Semantic Web is one of them.\\
-
 The notion of \say{Semantic Web} has been mentioned for the first time by Berners-Lee et al in \cite{berners}. In this paper, they describe it as a Web which is readable by machines in opposite of most of Web's content which were designed for humans to read. The Semantic Web isn't a separate Web but an extension of the current one which will bring structure to the meaningful content of Web pages.\\
-
-Two main technologies are used for the development of the Semantic Web : eXtensible Markup Language ( short XML) and the Resource Description Framework (short RDF). XML allows everyone to create their own tags and to arbitrary structure their documents but gives no information about what this structure means. Meaning is provided by RDF which stores it in sets of triples which are composed of a subject, a predicate and an object. Those three components can be related to the subject, the verb and object of an elementary sentence. In \cite{miller}, Miller presents a short introduction to the RDF standard and precises that a \say{Resource} can be any object which is uniquely identifiable by a Uniform Resource Identifier (URI).\\
-
-The third basic component of the Semantic Web are collections of information called ontologies. An ontology is, in computer science, a document which defines the relations among concepts. Basically, Web ontologies are composed of a taxonomy, which defines classes of objects and their relations, and a set of inference rules.\\
+Two main technologies are used for the development of the Semantic Web : eXtensible Markup Language (short XML) and the Resource Description Framework (short RDF). XML allows everyone to create their own tags and to arbitrary structure their documents but gives no information about what this structure means. Meaning is provided by RDF which stores it in sets of triples which are composed of a subject, a predicate and an object. Those three components can be related to the subject, the verb and object of an elementary sentence. In \cite{miller}, Miller presents a short introduction to the RDF standard and precises that a \say{Resource} can be any object which is uniquely identifiable by a Uniform Resource Identifier (URI).\\
+The third basic component of the Semantic Web are collections of information called ontologies. An ontology is, in computer science, a document which defines the relations among concepts. Basically, Web ontologies are composed of a taxonomy, which defines classes of objects and their relations, and a set of inference rules.
 % subsubsection semantic_web (end)
 
 \subsubsection{Semantic Resources} % (fold)
@@ -42,24 +33,16 @@ The third basic component of the Semantic Web are collections of information cal
 \paragraph{DBpedia} % (fold)
 \label{par:dbpedia}
 DBpedia\footnote{http://wiki.dbpedia.org/} is a project originally launched by two German universities (Berlin and Leipzig) and backed by an important community. It explores Wikipedia\footnote{https://en.wikipedia.org/} and extract information from it which results on the creation of a multilingual, large-scale knowledge base. The extraction framework, all the available end-points as well as some facts and figures about the project are presented in \cite{lehman}.\\
-
-DBpedia's ontology is based on classes (320 items) which form a subsumption hierarchy, the root element being owl:Thing, with a maximal depth of 5\footnote{Complete classes tree : http://mappings.dbpedia.org/server/ontology/classes/}. Theses classes are described by a total of 1650 different properties, forming a large set of RDF triples (580 million extracted from the English version of Wikipedia).\\
-
-Even though DBpedia is now a worldwide project and provides pages in 125 languages, the English one is still the most represented. We can indeed find 4.58 million of things\footnote{http://wiki.dbpedia.org/about/facts-figures} including 1,445,000 instances of the class \textit{Person}, 735,000 places \textit{Place}, 251,000 \textit{Species} \dots The number of instances described in this language is about three time larger than the second and third language (French and German). \\
-
+DBpedia's ontology is based on classes (320 items) which form a subsumption hierarchy, the root element being \emph{owl:Thing}, with a maximal depth of 5\footnote{Complete classes tree : http://mappings.dbpedia.org/server/ontology/classes/}. Theses classes are described by a total of 1650 different properties, forming a large set of RDF triples (580 million extracted from the English version of Wikipedia).\\
 As well as any RDF-structured dataset, DBpedia can be requesting with SPARQL (which is an recursive acronym : SPARQL Protocol and RDF Query Language) queries. SPARQL allows the user to search, add, modify or delete RDF data available on the Internet, see \cite{prud} for more details about the language. \\
-
-DBpedia also provides useful web services and HTTP endpoints. DBpedia Spotlight, which highlight DBpedia concepts in an input text is described in \cite{mendes} and further details about disambiguation using this service are presented in subsection \ref{sec:dbpedia_spotlight}. The official DBpedia SPARQL endpoint\footnote{http://dbpedia.org/sparql} allows the user to send SPARQL queries to the online Virtuoso Triple Store by using the browser interface or by sending a HTPP request. We learn in \cite{lehman} that the average amount of hits per day of this endpoint is of 2,910,410 for the 3.8 dataset version. \\
+DBpedia also provides useful web services and HTTP endpoints. DBpedia Spotlight, which highlight DBpedia concepts in an input text is described in \cite{mendes}. The official DBpedia SPARQL endpoint\footnote{http://dbpedia.org/sparql} allows the user to send SPARQL queries to the online Virtuoso Triple Store by using the browser interface or by sending a HTPP request.
 % paragraph dbpedia (end)
 \paragraph{WordNet} % (fold)
 \label{par:wordnet}
 WordNet\footnote{https://wordnet.princeton.edu/} is a lexical database of English which has been presented for the first time in 1995 in \cite{miller2}. It is hosted by the Princeton University, currently running version 3.1 but there are no current plan for a future release due to limited staffing.\\
-
-Its structure is based on the concept of \say{synset} (synonym set), a set cognitive synonyms. WordNet distinguish among Types (common nouns, verbs\dots) and Instances (specific persons\dots). Synsets are interliked using conceptual, semantic and lexical relations. The hierarchy is built by the use of the super-subordinate relation (or hyperonymy, hyponymy in WordNet's jargon). These relations implements the two directions of the \say{IS-A} expression. For instance, \textit{fruit} is \textbf{hyperonym} of \textit{apple} and \textit{horse} is a \textbf{hyponym} of \textit{animal}, the root element being \say{entity}. Other relations are also provided, like the antonymy (opposite of synonymy) or the meronymy and its opposite holonymy which implements the \say{IS-PART-OF} relation : \textit{finger} is a \textbf{meronym} of \textit{hand}. All these relations are transitive.\\
-
+Its structure is based on the concept of \say{synset} (synonym set), a set cognitive synonyms. WordNet distinguish among Types (common nouns, verbs\dots) and Instances (specific persons\dots). Synsets are interlinked using conceptual, semantic and lexical relations. The hierarchy is built by the use of the super-subordinate relation (or hyperonymy, hyponymy in WordNet's jargon). These relations implements the two directions of the \say{IS-A} expression. For instance, \textit{fruit} is \textbf{hyperonym} of \textit{apple} and \textit{horse} is a \textbf{hyponym} of \textit{animal}, the root element being \emph{entity}. Other relations are also provided, like the antonymy (opposite of synonymy) or the meronymy and its opposite holonymy which implements the \say{IS-PART-OF} relation : \textit{finger} is a \textbf{meronym} of \textit{hand}. All these relations are transitive.\\
 This resource is useful if we are searching for entities. Since the maximal depth is of the ontology is of 16, the leafs are very detailed nous (tsetse-fly, Yukon white birch, \dots) but it also contains more general concepts (vehicle, animal, \dots). WordNet contains at the moment 155,287 unique strings incuding 117,798 nouns.\\ 
-
-It exists several ways to browse this resource. An online interface allows the user to manually query the dataset and to navigate in it through hyperlinks. For software and research purposes, the user has to download one of the released version of WordNet's dataset as well as a specific library according to the code language he's using.\\
+It exists several ways to browse this resource. An online interface allows the user to manually query the dataset and to navigate in it through hyperlinks. For software and research purposes, the user has to download one of the released version of WordNet's dataset as well as a specific library according to the code language he's using.
 % paragraph wordnet (end)
 % subsubsection semantic_resources (end)
 
@@ -73,35 +56,30 @@ One has to be very careful with the use of this metric because it initially does
 \paragraph{Wu-Palmer evolved} % (fold)
 \label{par:wu_palmer_evolved}
 In \cite{zara}, Zargayouna exposes a consequence of the Wu-Palmer formula which can, according to the context of use, gives false results. Indeed, in Wu-Palmer, the similarity between two concepts is related to their distance to the LCS. Therefore, the more \say{general} the LCS is, the less similar the concepts (and inversely). This can be an issue if one want to give an advantage to the father-child relation instead of the brother-brother one. \\
-
 In order to achieve what's mentioned above, the author create a virtual bottom node to which every leaf node is linked. Then, she integrates in the equation the maximum number of edges between this virtual node and the LCS as well as the number of edges between the LCS and each of the considered concepts. \\
-
 It is important to note that this modification of the Wu-Palmer formula rest on the fact that dist(LCS,c) can be null if one of the concepts is the LCS which occurs in the father-child relation. In this case, the third part of the denominator becomes null and the similarity is the same as in Wu-Palmer. In the brother-brother relation yet, this part isn't null and the similarity decrease.
 % paragraph wu_palmer_evolved (end)
 % subsubsection similarity_measures (end)
 
+\subsubsection{Existing approaches} % (fold)
+\label{ssub:existing_approaches}
 \paragraph{Graph-cut based enrichment} % (fold)
 \label{par:graph_cut_based_enrichment}
 In \cite{qian}, Qian and Hua expose their graph-based approach of the tag enrichment process. They represent each initial tag of their corpus as a node and interlink them (using \emph{n-links}). The weight of those n-links can be seen as the similarity between the two linked nodes, computed by the help of the Google distance \cite{cili}. They add two virtual nodes called \emph{sink} and \emph{source}. Then, they link all nodes to one of these virtual nodes using \emph{t-links}.\\
-
 The aim of their approach is to split all the tags into two distinct sets S (containing the source node) and T (containing the sink one) by assigning the labels s (source) if the tag is relevant to the image and t (sink) if not to the nodes. Then, they determine how many tags are relevant to the image by solving the combinational optimization problem through the graph.\\
-
 This paper is really short and not very clear but it gives good ideas about the tags' representation as a graph and how to interlink them. According to the authors, the results are satisfactory.   
 % paragraph graph_cut_based_enrichment (end)
 
 \paragraph{Enrich Folksonomy Tag Space} % (fold)
 \label{par:enrich_folksonomy_tag_space}
-Folksonomies are typical Web 2.0 systems that allow users to upload, tag and share content such as pictures, bookmarks \dots In \cite{angel}, Angeletou and al. envisaged tag space enrichment with semantic relations by exploring online ontologies. Their method is composed of two phases :
+Folksonomies are typical Web 2.0 systems that allow users to upload, tag and share content such as pictures, bookmarks\dots In \cite{angel}, Angeletou and al. envisaged tag space enrichment with semantic relations by exploring online ontologies. Their method is composed of two phases :
 \begin{itemize}
 	\item Concept identification 
 	\item Relation discovery
 \end{itemize}
 The first step is achieved by extracting concepts from online ontologies in which the local concept label matches the tag. In order to exploit all meanings, the authors retrieve all the potential semantic terms for each tag and then discover relation between them in the second phase. This means that no disambiguation is processed but it is a consequence of the relation discovery phase.\\
 This phase consist of the identification of the relation between two tags \emph{T1} and \emph{T2}. Four kind of relations are distinguished : Subsumption, Disjointness, Generic, Sibling and Instance Of. These relations can be found by two ways : a relation can be declared within an ontology or, if no ontology contain such relation, one is made by crossing knowledge from different ontologies.\\
-
-The author then present different experiments as well as some issues rose during this phase. One in particular is important to keep in mind : when users tags resources, especially pictures, they tend to tag them with specific vocabulary, mainly instances rather than \emph{abstract} concepts. This can result on lot of \say{semantic noise} : tags which can't be match with concepts from online ontologies.\\
-
-This paper is really interesting and approaches the topic in a very general point of view, which ensure the flexibility of its implementation. We will see in \ref{sub:method} that this method perfectly adapt to our study. 
+The author then present different experiments as well as some issues rose during this phase. One in particular is important to keep in mind : when users tags resources, especially pictures, they tend to tag them with specific vocabulary, mainly instances rather than \emph{abstract} concepts. This can result on lot of \say{semantic noise} : tags which can't be match with concepts from online ontologies.
 % paragraph enrich_folksonomy_tag_space (end)
 % subsubsection existing_approaches (end)
 % subsection state_of_the_art (end)

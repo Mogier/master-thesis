@@ -1,0 +1,6 @@
+PREFIX rdf:<http://www.w3.org/1999/02/22-rdf-syntax-ns#> 
+PREFIX rdfs:<http://www.w3.org/2000/01/rdf-schema#>
+SELECT ?o1 ?o2 where {GRAPH <http://dbpedia.org> { CONCEPT_URI rdf:type ?o1
+FILTER regex(?o1, '^^http://dbpedia.org/ontology/(?!Wikidata:)')		
+OPTIONAL{ ?o1 rdfs:label ?o2 
+FILTER(langMatches(lang(?o2), 'EN'))}}} 

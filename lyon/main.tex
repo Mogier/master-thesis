@@ -1,37 +1,90 @@
 \documentclass{llncs}
+
+\makeatletter
+%% The "\@seccntformat" command is an auxiliary command
+%% (see pp. 26f. of 'The LaTeX Companion,' 2nd. ed.)
+\def\@seccntformat#1{\@ifundefined{#1@cntformat}%
+   {\csname the#1\endcsname\quad}  % default
+   {\csname #1@cntformat\endcsname}% enable individual control
+}
+\let\oldappendix\appendix %% save current definition of \appendix
+\renewcommand\appendix{%
+    \oldappendix
+    \newcommand{\section@cntformat}{\appendixname~\thesection\quad}
+}
+\makeatother
+
 \usepackage[utf8]{inputenc}
 \usepackage{amsmath}
 \usepackage{geometry}
 \usepackage{graphicx}
 \usepackage{dirtytalk}
 \usepackage{cite}
+\usepackage{appendix}
+\usepackage{listings}
+\usepackage{color}
 \setlength{\textwidth}{15cm}
 \setlength\oddsidemargin{2pt}
 \setlength\evensidemargin{2pt}
+\renewcommand{\lstlistingname}{Code}
 
+\definecolor{pblue}{rgb}{0.13,0.13,1}
+\definecolor{pgreen}{rgb}{0,0.5,0}
+\definecolor{pred}{rgb}{0.9,0,0}
+\definecolor{pgrey}{rgb}{0.46,0.45,0.48}
+
+\lstset{language=Java,
+  showspaces=false,
+  tabsize=2,
+  numbers=left,
+  showtabs=false,
+  breaklines=true,
+  showstringspaces=false,
+  breakatwhitespace=true,
+  commentstyle=\color{pgreen},
+  keywordstyle=\color{pblue},
+  stringstyle=\color{pred},
+  basicstyle=\ttfamily\scriptsize,
+  captionpos=b
+}
+\lstdefinelanguage{json}{}
+
+\lstdefinelanguage{SPARQL}{
+	morekeywords={PREFIX, SELECT, WHERE, FILTER, OPTIONAL, DISTINCT}
+}
 % 
 % Title
 % 
 \title{Image annotation network}
-\subtitle{PFE report}
 \author{Mael Ogier}
-\institute{INSA Lyon - Département Informatique
-\email{mael.ogier@insa-lyon.fr}}
+\institute{Département Informatique\\INSA Lyon\\2014-2015}
 
 \begin{document}
 \maketitle
-
+\renewcommand{\abstractname}{} 
+\begin{abstract}
+Sous la responsabilité de :\\
+Dr. David Coquil : Universität Passau\\
+Dr. Elöd Egyed-Zsigmond : Département Informatique
+\end{abstract}
 % 
 % Abstract
-% 
+%
+\renewcommand{\abstractname}{Résumé}  
 \begin{abstract}
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-\keywords{object recognition, image transformations, local image features}
+De nos jours, le media image est l'un des plus utilisé, il est facile à capturer, relativement léger informatiquement parlant et parle à tous sans soucis de langage. Nombre d'entreprises utilisent des images tous les jours, à commencer par les médias. Elles ont donc besoin d'outils afin de retrouver la bonne image au bon moment. En tant qu'être humain, il nous est beaucoup plus facile de décrire ce que nous recherchons par nos propres mots plutôt qu'à l'aide d'histogrammes de distribution de couleurs. C'est pourquoi il est intéressant d'ajouter des annotations (ou tags) aux images afin de les décrire de façon plus naturelle. Avec ce projet, nous proposons un prototype d'enrichissement sémantique de ces annotations basé sur le web sémantique et sur une architecture des données en mode graphe. Cinq expériences sont présentées et les résultats sont évalutés et discutés. Enfin, quelques pistes sont données pour de futures recherches. 
 \end{abstract}
 
+\renewcommand{\abstractname}{Abstract}  
+\begin{abstract}
+Image is a popular medium nowadays : it is easy to capture, can be really light on your electronic device and speaks to everyone without distinction of language. Lot of companies use image data every day and so need a good way to retrieve them. For a human-being, the more intuitive way to describe what he's looking for is by the use of his own words, not a distribution of colors or any low-level feature. Therefore, it is interesting to add annotations (also called tags) to images in order to describe them in an natural language way. In this work, we propose a semantic enrichment prototype based on the semantic web and graph models. Five experiments are presented and their results are discussed. Eventually we expose some future work which should be interesting.
+\keywords{image annotation, semantic enrichment, semantic web, graph model}
+\end{abstract}
+
+
 \include{introduction}
-% \include{context}
 \include{content}
-\include{conclusion}
 \include{bibliography}
+\appendix
+\include{annexes}
 \end{document}
