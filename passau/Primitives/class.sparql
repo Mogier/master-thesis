@@ -1,0 +1,5 @@
+PREFIX rdfs:<http://www.w3.org/2000/01/rdf-schema#>
+SELECT DISTINCT ?o ?o2 WHERE{GRAPH <http://dbpedia.org> { CONCEPT_URI rdfs:subClassOf  ?o
+FILTER regex(?o, '^^http://dbpedia.org/ontology/(?!Wikidata:) || ^^http://www.w3.org/2002/07/owl#Thing')
+OPTIONAL{ ?o rdfs:label ?o2
+FILTER(langMatches(lang(?o2), 'EN'))}}}

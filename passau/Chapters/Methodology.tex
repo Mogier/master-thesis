@@ -6,10 +6,31 @@
 
 \lhead{Chapter 8 \emph{Proposed Methodology}} % Change X to a consecutive number; this is for the header on each page - perhaps a shortened title
 
-%----------------------------------------------------------------------------------------
-%	SECTION 1
-%----------------------------------------------------------------------------------------
+Here we will present the chosen methodology, highly based on the three approaches presented in \ref{chapter:ExistingServices}. This methodology aims to support different kind of experiments in order to try to answer our thesis questions previously stated in \ref{sec:thesis_objectives}. 
 
-\section{Section 1}
+\section{Global process} % (fold)
+\label{sec:global_process}
+With this work we want to propose a prototype which semantically enrich images given an initial set of tags. This prototype will be based on 3 steps :
+\begin{enumerate}
+	\item Concept identification
+	\item Relation discovery
+	\item Candidates detection
+\end{enumerate}
+As previously said, the two first steps will be similar as those presented in \ref{sec:enrich_folksonomy_tag_space}. \\
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam ultricies lacinia euismod. Nam tempus risus in dolor rhoncus in interdum enim tincidunt. Donec vel nunc neque. In condimentum ullamcorper quam non consequat. Fusce sagittis tempor feugiat. Fusce magna erat, molestie eu convallis ut, tempus sed arcu. Quisque molestie, ante a tincidunt ullamcorper, sapien enim dignissim lacus, in semper nibh erat lobortis purus. Integer dapibus ligula ac risus convallis pellentesque.
+We also want to use a lemmatization process in order to group together the different inflected forms of a word so they can be analyzed as a single item. This will be achieve by using a hand-made tool based on regular expressions.\\
+
+In order to compute semantic metrics, we will add virtual nodes to the graph, fulfiling the requirement of the Wu-Palmer evolved measure presented in \ref{ssub:evolved_wu_palmer}. More details about the graph structure will be presented in \ref{sec:graph_structure}.\\
+
+We will set up different experiments, some based on the graph structure and some not. They will be run on a concrete images database and evaluated by several ways. Their results will then be presented, compared and discussed.
+% section global_process (end)
+\section{Knowledge bases} % (fold)
+\label{sec:knowledge_bases}
+The difference we want to propose between our tool and the approaches presented in \ref{chapter:ExistingServices} is to use several online ontologies in order to detect concepts and to create relations between them. We selected two resources : DBpedia and WordNet, already presented in \ref{sub:dbpedia} and \ref{sub:wordnet}. We will need ways to query these ontologies and browse them. In order not to get two separated graphs, we will create interlinks between concepts from both of the resources.\\
+Eventually, the candidates we will propose as new annotations will also come from both of the ontologies. 
+% section knowledge_bases (end)
+
+\section{Data representation} % (fold)
+\label{sec:data_representation}
+As in \ref{sec:graph_cut_based_enrichment}, we want to represent our data as a graph. We will extract concepts from our chosen ontologies and save them as vertexes of our graph. We will interlink them using the already existing relations in their respective ontologies and add new ones we will detect by ourself. The graph structure is detailed in \ref{sec:graph_structure}.
+% section data_representation (end)

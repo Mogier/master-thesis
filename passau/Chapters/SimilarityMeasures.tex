@@ -36,7 +36,7 @@ It means that, with regards to the Shortest Path metric, addition and social are
 
 \subsection{Wu-Palmer} % (fold)
 \label{ssub:wu_palmer}
-In \cite{wu1994verbs} Wu and Palmer (1994) introduce a new scaled metric in order to translate English verbs into Mandarin Chinese. This measure takes into account the Least Common Subsummer (LCS)\footnote{Sometimes called LCA : Least Common Ancestor} of the 2 considered concepts. The formula is :
+In \cite{wu1994verbs} Wu and Palmer (1994) introduce a new scaled metric in order to translate English verbs into Mandarin Chinese. This measure takes into account the Least Common Subsummer (LCS)\footnote{Sometimes called LCA : Lowest Common Ancestor} of the 2 considered concepts. The formula is :
 \begin{equation}
 \label{eq:wupalmer}
 sim_{WP}(c_1, c_2) = \frac{2*depth(lcs(c_1,c_2))}{depth(c_1) + depth(c_2)}

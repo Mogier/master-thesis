@@ -1,0 +1,42 @@
+{
+  "@text": "obama,sea,wolf,germany",
+  "@confidence": "0.0",
+  "@support": "0",
+  "@types": "",
+  "@sparql": "",
+  "@policy": "whitelist",
+  "Resources":   [
+        {
+      "@URI": "http://dbpedia.org/resource/Michelle_Obama",
+      "@support": "321",
+      "@surfaceForm": "obama",
+      "@offset": "0",
+      "@similarityScore": "0.143932044506073",
+      "@percentageOfSecondRank": "0.7407412852273438"
+    },
+        {
+      "@URI": "http://dbpedia.org/resource/Sea",
+      "@support": "1016",
+      "@surfaceForm": "sea",
+      "@offset": "6",
+      "@similarityScore": "0.11291095614433289",
+      "@percentageOfSecondRank": "0.5072430234623665"
+    },
+        {
+      "@URI": "http://dbpedia.org/resource/Wolf_%28film%29",
+      "@support": "50",
+      "@surfaceForm": "wolf",
+      "@offset": "10",
+      "@similarityScore": "0.12193222343921661",
+      "@percentageOfSecondRank": "0.888975663754396"
+    },
+        {
+      "@URI": "http://dbpedia.org/resource/Germany",
+      "@support": "106627",
+      "@surfaceForm": "germany",
+      "@offset": "15",
+      "@similarityScore": "0.10691326856613159",
+      "@percentageOfSecondRank": "0.9705061222373553"
+    }
+  ]
+}

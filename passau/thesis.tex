@@ -44,7 +44,7 @@
 \definecolor{darkred}{rgb}{0.6,0.0,0.0}
 
 \lstset{
-  basicstyle=\ttfamily\footnotesize,
+  basicstyle=\ttfamily\scriptsize,
   columns=fullflexible,
   showstringspaces=false,
   keywordstyle=\color{black}\bfseries,
@@ -68,7 +68,7 @@
 }
 
 \lstdefinelanguage{SPARQL}{
-	morekeywords={PREFIX, SELECT, WHERE}
+	morekeywords={PREFIX, SELECT, WHERE, FILTER, OPTIONAL, DISTINCT}
 }
 
 \lstdefinelanguage{XML}
@@ -82,6 +82,8 @@
   keywordstyle=\color{red},
   % morekeywords={xmlns,xsi,noNamespaceSchemaLocation,type,id,x,y,source,target,version,tool,transRef,roleRef,objective,eventually}% list your attributes here
 }
+
+\lstdefinelanguage{json}{}
 
 \begin{document}
 
@@ -145,6 +147,35 @@
 \end{titlepage}
 
 %----------------------------------------------------------------------------------------
+% DECLARATION PAGE
+% Your institution may give you a different text to place here
+%----------------------------------------------------------------------------------------
+
+\Declaration{
+
+\addtocontents{toc}{\vspace{1em}} % Add a gap in the Contents, for aesthetics
+
+I, \authornames, declare that this thesis titled, '\ttitle' and the work presented in it are my own. I confirm that:
+
+\begin{itemize} 
+\item[\tiny{$\blacksquare$}] This work was done wholly or mainly while in candidature for a research degree at this University.
+\item[\tiny{$\blacksquare$}] Where any part of this thesis has previously been submitted for a degree or any other qualification at this University or any other institution, this has been clearly stated.
+\item[\tiny{$\blacksquare$}] Where I have consulted the published work of others, this is always clearly attributed.
+\item[\tiny{$\blacksquare$}] Where I have quoted from the work of others, the source is always given. With the exception of such quotations, this thesis is entirely my own work.
+\item[\tiny{$\blacksquare$}] I have acknowledged all main sources of help.
+\item[\tiny{$\blacksquare$}] Where the thesis is based on work done by myself jointly with others, I have made clear exactly what was done by others and what I have contributed myself.\\
+\end{itemize}
+ 
+Signed:\\
+\rule[1em]{25em}{0.5pt} % This prints a line for the signature
+ 
+Date:\\
+\rule[1em]{25em}{0.5pt} % This prints a line to write the date
+}
+
+\clearpage % Start a new page
+
+%----------------------------------------------------------------------------------------
 %	QUOTATION PAGE
 %----------------------------------------------------------------------------------------
 
@@ -191,7 +222,8 @@ Finally, I thanks the Dropkick Murphys for their energizing music and the worldw
 
 \abstract{\addtocontents{toc}{\vspace{1em}} % Add a gap in the Contents, for aesthetics
 
-The Thesis Abstract is written here (and usually kept to just this page). The page is kept centered vertically so can expand into the blank space above the title too\ldots
+Image is a popular medium nowadays : it is easy to capture, can be really light on your electronic device and speaks to everyone without distinction of language. Lot of companies use image data every day and so need a good way to retrieve them. For a human-being, the more intuitive way to describe what he's looking for is by the use of his own words, not a distribution of colors or any low-level feature. Therefore, it is interesting to add annotations (also called tags) to images in order to describe them in an natural language way. In this work, we propose a semantic enrichment prototype based on the semantic web and graph models. Five experiments are presented and their results are discussed. Eventually we expose some future work which should be interesting.
+\keywords{image annotation, semantic enrichment, semantic web, graph model}
 }
 
 \clearpage % Start a new page
@@ -222,7 +254,7 @@ The Thesis Abstract is written here (and usually kept to just this page). The pa
 \lhead{\emph{Abbreviations}} % Set the left side page header to "Abbreviations"
 \listofsymbols{ll} % Include a list of Abbreviations (a table of two columns)
 {
-\textbf{LCS} & \textbf{L}owest \textbf{C}ommon \textbf{S}ubsumer \\
+\textbf{LCS} & \textbf{L}east \textbf{C}ommon \textbf{S}ubsumer \\
 \textbf{RDF} & \textbf{R}esource \textbf{D}escription \textbf{F}ramework \\
 \textbf{SP} & \textbf{S}hortest \textbf{P}ath \\
 \textbf{SPARQL} & \textbf{S}PARQL \textbf{P}rotocol \textbf{a}nd \textbf{R}DF \textbf{Q}uery \textbf{L}anguage \\

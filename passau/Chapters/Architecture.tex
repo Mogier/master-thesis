@@ -12,41 +12,86 @@
 
 \section{Technology Choices}
 
-\subsection{Java}
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam ultricies lacinia euismod. Nam tempus risus in dolor rhoncus in interdum enim tincidunt. Donec vel nunc neque. In condimentum ullamcorper quam non consequat. Fusce sagittis tempor feugiat. Fusce magna erat, molestie eu convallis ut, tempus sed arcu. Quisque molestie, ante a tincidunt ullamcorper, sapien enim dignissim lacus, in semper nibh erat lobortis purus. Integer dapibus ligula ac risus convallis pellentesque.
+\subsection{Java Language}
+Java is a general-purpose computer programming language that is concurrent, class-based, object-oriented, and specifically designed to have as few implementation dependencies as possible. It is also a cross-platform language which means that it would be possible to use it without any recompilation needed. Java is very easy to use, well documented a has the support of a large community (more than 9 million developers reported). Therefore, lot of libraries are available, we will present some of them below. 
 
 \subsection{Neo4j}
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam ultricies lacinia euismod. Nam tempus risus in dolor rhoncus in interdum enim tincidunt. Donec vel nunc neque. In condimentum ullamcorper quam non consequat. Fusce sagittis tempor feugiat. Fusce magna erat, molestie eu convallis ut, tempus sed arcu. Quisque molestie, ante a tincidunt ullamcorper, sapien enim dignissim lacus, in semper nibh erat lobortis purus. Integer dapibus ligula ac risus convallis pellentesque.
-
-\subsection{NLP}
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam ultricies lacinia euismod. Nam tempus risus in dolor rhoncus in interdum enim tincidunt. Donec vel nunc neque. In condimentum ullamcorper quam non consequat. Fusce sagittis tempor feugiat. Fusce magna erat, molestie eu convallis ut, tempus sed arcu. Quisque molestie, ante a tincidunt ullamcorper, sapien enim dignissim lacus, in semper nibh erat lobortis purus. Integer dapibus ligula ac risus convallis pellentesque.
+Graph-based databases are very intuitive to work with and allow the user to model the world as he experience it. The model schema isn't rigid and the user can edit it at anytime, adding new entities or new kind of relationships. Neo4j is an open-source graph database, implemented in Java (so cross-platform), maturing for 15 years and currently running version 2.2. It is the most popular graph database nowadays\footnote{http://db-engines.com/en/ranking/graph+dbms}, has a great scalability, a strong community and has its own query language : Cypher. 
 
 \subsection{DBpedia Spotlight} % (fold)
 \label{sub:dbpedia_spotlight}
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam ultricies lacinia euismod. Nam tempus risus in dolor rhoncus in interdum enim tincidunt. Donec vel nunc neque. In condimentum ullamcorper quam non consequat. Fusce sagittis tempor feugiat. Fusce magna erat, molestie eu convallis ut, tempus sed arcu. Quisque molestie, ante a tincidunt ullamcorper, sapien enim dignissim lacus, in semper nibh erat lobortis purus. Integer dapibus ligula ac risus convallis pellentesque.
+As presented in \ref{sub:dbpedia}, DBpedia propose a nice tool to automatically annotating mentions of DBpedia resources in text : DBpedia Spotlight. We chose to use it even if we can't exploit its full potential since we don't have a context. Its usage is really simple and performances are quite ok given our use-case. See Code \ref{code:spotlight} for a sample response.
+% subsection dbpedia_spotlight (end)
 
-% subsubsection dbpedia_spotlight (end)
-
-\subsection{JAWS}
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam ultricies lacinia euismod. Nam tempus risus in dolor rhoncus in interdum enim tincidunt. Donec vel nunc neque. In condimentum ullamcorper quam non consequat. Fusce sagittis tempor feugiat. Fusce magna erat, molestie eu convallis ut, tempus sed arcu. Quisque molestie, ante a tincidunt ullamcorper, sapien enim dignissim lacus, in semper nibh erat lobortis purus. Integer dapibus ligula ac risus convallis pellentesque.
-
-\subsection{JENA}
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam ultricies lacinia euismod. Nam tempus risus in dolor rhoncus in interdum enim tincidunt. Donec vel nunc neque. In condimentum ullamcorper quam non consequat. Fusce sagittis tempor feugiat. Fusce magna erat, molestie eu convallis ut, tempus sed arcu. Quisque molestie, ante a tincidunt ullamcorper, sapien enim dignissim lacus, in semper nibh erat lobortis purus. Integer dapibus ligula ac risus convallis pellentesque.
-
+\subsection{Semantic Resources Libraries} % (fold)
+\label{sub:semantic_resources_libraries}
+We needed to access the chosen online ontologies (DBpedia's and WordNet's) from our prototype. To achieve this, we used the fact that Java is very popular and lot of libraries are available.
+\paragraph{JENA} % (fold)
+\label{par:jena}
+We chose Apache JENA ARQ\footnote{https://jena.apache.org/documentation/query/index.html} to query the RDF-base schema of DBpedia. This solution is stable and maintained by a famous structure : Apache. Using it was really simple.
+% paragraph jena (end)
+\paragraph{JAWS} % (fold)
+\label{par:jaws}
+Regarding WordNet, we used JAWS\footnote{http://lyle.smu.edu/~tspell/jaws/} which has been developed and is maintain by a member of the Southern Methodist University (Dallas, Texas). Its last version is a bit old but this isn't an issue since WordNet's upgrades have also stopped. This library was also deeply intuitive and easy to use.
+% paragraph jaws (end)
+% subsection semantic_resources_libraries (end)
 \subsection{JSoup}
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam ultricies lacinia euismod. Nam tempus risus in dolor rhoncus in interdum enim tincidunt. Donec vel nunc neque. In condimentum ullamcorper quam non consequat. Fusce sagittis tempor feugiat. Fusce magna erat, molestie eu convallis ut, tempus sed arcu. Quisque molestie, ante a tincidunt ullamcorper, sapien enim dignissim lacus, in semper nibh erat lobortis purus. Integer dapibus ligula ac risus convallis pellentesque.
+Our two last experiments are based on Wikipedia's web-pages. Therefore we needed a way to crawl and extract content from them. The JSoup\footnote{http://jsoup.org/} library was a perfect asset to achieve this. It is open-source, implements the WHATWG HTML5 specification, and parses HTML to the same DOM as modern browsers do. It also allows the user to build specific queries to access particular elements in the DOM.
 
+\subsection{Stanford NLP}
+Crawling web-pages is a thing, but extracting relevant data from it is another one. The Stanford NLP Research Group\footnote{http://nlp.stanford.edu/} has released several libraries in different programming languages including Java. Those libraries can achieve many things such as sentence segmentation, Part-of-speech (POS) tagging, named entities recognition and so on\dots We used the POS Tagger to extract nouns from Wikipedia paragraphs.
 %----------------------------------------------------------------------------------------
 %	SECTION 2
 %----------------------------------------------------------------------------------------
 
-\section{Graph Structure}
+\section{Graph Structure} % (fold)
+\label{sec:graph_structure}
 
-\subsection{Pro-Cons}
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam ultricies lacinia euismod. Nam tempus risus in dolor rhoncus in interdum enim tincidunt. Donec vel nunc neque. In condimentum ullamcorper quam non consequat. Fusce sagittis tempor feugiat. Fusce magna erat, molestie eu convallis ut, tempus sed arcu. Quisque molestie, ante a tincidunt ullamcorper, sapien enim dignissim lacus, in semper nibh erat lobortis purus. Integer dapibus ligula ac risus convallis pellentesque.
+\subsection{Vertexes} % (fold)
+\label{sub:vertexes}
+Each vertex represents a semantic concept (virtual or real).\\
+Virtual ones are concepts created in purpose to perform operations. Here we’re talking about 2 different kinds of nodes :
+\begin{itemize}
+	\item Base concepts : those are created in order to represent the originals tags. Their URIs follow this pattern : “base:TAG” (ex : base:dog) and their \emph{TAG} value is lemmatized (dogs -$>$ dog).
+	\item Top/Bottom concepts : these two concepts (virtual:top and virtual:bottom) are essential in the compuation of the Wu-Palmer evolved measure (see \ref{ssub:evolved_wu_palmer}).
+\end{itemize}
+Real nodes are semantic nodes linked to entities, classes (DBpedia) or synsets (WordNet):
+\begin{itemize}
+	\item WordNet's nodes pattern : “Wordnet:TAG” (ex: Wordnet:plant)
+	\item DBpedia's nodes pattern : “DPedia’s concept URI”\\(ex: http://dbpedia.org/resource/London)
+\end{itemize}
+% subsection vertexes (end)
 
-\subsection{Vertexes}
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam ultricies lacinia euismod. Nam tempus risus in dolor rhoncus in interdum enim tincidunt. Donec vel nunc neque. In condimentum ullamcorper quam non consequat. Fusce sagittis tempor feugiat. Fusce magna erat, molestie eu convallis ut, tempus sed arcu. Quisque molestie, ante a tincidunt ullamcorper, sapien enim dignissim lacus, in semper nibh erat lobortis purus. Integer dapibus ligula ac risus convallis pellentesque.
+\subsection{Edges} % (fold)
+\label{sub:edges}
+There are 3 kind of edges :
+\begin{itemize}
+	\item VIRTUAL : represent virtual links between nodes, not present in any of the semantic resources, created by the algorithm
+	\item EQUIV : represent an equivalence between nodes from 2 different ontologies \\
+	(ex : http://dbpedia.org/resource/Dog and Wordnet:dog)
+	\item PARENT : represent a semantic link which is of type “IS-A” (implemented by the rdfs:subClassOf predicate in DBpedia and the hyperonym/holonym relation in WordNet)
+\end{itemize}
+% subsection edges (end)
 
-\subsection{Edges}
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam ultricies lacinia euismod. Nam tempus risus in dolor rhoncus in interdum enim tincidunt. Donec vel nunc neque. In condimentum ullamcorper quam non consequat. Fusce sagittis tempor feugiat. Fusce magna erat, molestie eu convallis ut, tempus sed arcu. Quisque molestie, ante a tincidunt ullamcorper, sapien enim dignissim lacus, in semper nibh erat lobortis purus. Integer dapibus ligula ac risus convallis pellentesque.
+\subsection{Construction} % (fold)
+\label{sub:construction}
+Now that we have described our graph, we will present how it is built.\\
+
+Given an initial set of input tags, the first step of our construction process is to detect semantic concepts among them. To achieve this, we use DBpedia Spotlight (shortly presented in \ref{sub:dbpedia_spotlight}) and its REST endpoint. It takes as input a string (here the list of tags, separated by commas) and returns a JSON object containing detected semantic concepts, see Code \ref{code:spotlight} for a sample response. We then use the JAWS library and request all input tags to our WordNet database. This returns us a list of synsets.\\
+
+\lstinputlisting[language=json,caption=DBpedia Spotlight sample response,float,label={code:spotlight}]{./Primitives/sampleDBpediaSpotlight.json}
+We have now to create the hierarchical tree for each of this base concepts and stop when we reach the ontology's root. In order to do so, we again split the task according to the ontology the concept comes from. For DBpedia's, we send SPARQL requests through the JENA library. Code \ref{code:entity} if the resource is an entity and we need to find its class. Code \ref{code:class} if the resource is a class and we so need to find it's superclass.\\
+\lstinputlisting[language=SPARQL,caption=Find entity's class,float,label={code:entity}]{./Primitives/entity.sparql}
+\lstinputlisting[language=SPARQL,caption=Find class' superclass,float,label={code:class}]{./Primitives/class.sparql}
+It is a bit more simple with the WordNet's concepts. Since we have the initial synsets, we can easily navigate into them and extract hypernyms. This whole process is recursive, for each new concept we start again.\\
+
+The last step of our process is the detection of equivalences. To do so we start from the DBpedia's nodes, get their label and request WordNet. If a correspondence is found, then we create the equivalent node, interlink it via an EQUIV edge to the initial one and build its generalization tree as presented above.
+% subsection construction (end)
+
+\subsection{Pro-Cons} % (fold)
+\label{sub:pro_cons}
+This graph-based model approach has several benefits : it is more intuitive to imagine the inheritance of a concept, the computation of basic metrics such as shortest path between two concepts or their Least Common Subsumer (LCS) is really easy, the schema isn't rigid and has, in fact, evolved during the project \dots\\
+
+However, our choice also has drawbacks : No disambiguation system has been implemented which means that all parents of a node are added to the graph making it always bigger and slower to browse. Given the graph's size and my machine performances, the integration of the Wu-Palmer evolved measure wasn't possible (but implemented and tested on smaller graphs).
+% subsection pro_cons (end)
+% section graph_structure (end)
