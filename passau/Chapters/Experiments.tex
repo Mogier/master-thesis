@@ -49,7 +49,7 @@ The top 20 used tags are also available below.
 \end{enumerate}
 \end{multicols}
 
-For the purpose of our tests, we created a graph based on 1350 images that are located around Berlin (Germany). The PostgreSQL query is available in Code \ref{code:berlin}.
+For the purpose of our tests, we created a graph based on 1350 images that are located around Berlin (Germany). The PostgreSQL query we used to extract them is available in Code \ref{code:berlin}.
 \lstinputlisting[language=SQL,caption=PostgreSQL query to retrieve images around Berlin,label={code:berlin}]{./Primitives/berlinImages.sql}
 
 This gave us a graph which contains 5212 nodes and 7543 relations, their distributions are presented in Tables \ref{table:nodes} and \ref{table:edges}. An example of a Cypher query counting the WordNet's nodes is also presented in Code \ref{code:cypherWordNet}.\\
@@ -81,29 +81,117 @@ This gave us a graph which contains 5212 nodes and 7543 relations, their distrib
 Thanks to the Gephi software\footnote{http://gephi.github.io/}, we were able to compute some statistics about our network and we learned that the longest shortest path between two nodes (also called graph's diameter) of our graph is of 20 and the average path length between two nodes is of 6.64.
 
 % section dataset (end)
+\section{Computer Characteristics} % (fold)
+\label{sec:computer_characteristics}
+The computer we will use for our operations has the following characteristics :
+\begin{enumerate}
+  \item OS : Ubuntu 14.04 LTS (64 bits)
+  \item RAM : 3,7 Go
+  \item CPU : Intel Celeron(R) CPU 847 @ 1.10GHz x 2
+\end{enumerate}
+% section computer_characteristics (end)
 
+\section{Algorithms Explanation}
+The algorithms we will present in this section are supported by the experiments classes we detailed in \ref{sub:semobsneo4j}.
 
-%----------------------------------------------------------------------------------------
-%	SECTION 2
-%----------------------------------------------------------------------------------------
+\subsection{Matrices exports} % (fold)
+\label{sub:matrices_exports}
+As presented in \ref{sub:semobsneo4j}, we developed a way to calculate semantic distances between nodes and export the results as matrices. To achieve this, we implemented two measures : the Shortest Path distance (see \ref{ssub:shortest_path}) and the evolved Wu-Palmer algorithm (see \ref{ssub:evolved_wu_palmer}). This last implementation also implies the development of a Cypher query which retrieves two nodes' LCS. See Code \ref{code:lca} for the complete query.\\
+\lstinputlisting[language=SQL,caption=Cypher query to retrieve two nodes' LCS,float,label={code:lca}]{./Primitives/lcaCypher.sql}
 
-\section{Code Explanation}
+With our architecture, it is possible to compute a distance matrix for each image based on its initial tags or to compute a bigger and global matrix taking all images' tags into account.\\
 
-Sed ullamcorper quam eu nisl interdum at interdum enim egestas. Aliquam placerat justo sed lectus lobortis ut porta nisl porttitor. Vestibulum mi dolor, lacinia molestie gravida at, tempus vitae ligula. Donec eget quam sapien, in viverra eros. Donec pellentesque justo a massa fringilla non vestibulum metus vestibulum. Vestibulum in orci quis felis tempor lacinia. Vivamus ornare ultrices facilisis. Ut hendrerit volutpat vulputate. Morbi condimentum venenatis augue, id porta ipsum vulputate in. Curabitur luctus tempus justo. Vestibulum risus lectus, adipiscing nec condimentum quis, condimentum nec nisl. Aliquam dictum sagittis velit sed iaculis. Morbi tristique augue sit amet nulla pulvinar id facilisis ligula mollis. Nam elit libero, tincidunt ut aliquam at, molestie in quam. Aenean rhoncus vehicula hendrerit.
+These exports are a support to the comparison of our implemented semantic distances and other metrics one would like to use, like the statistical matrices produced by the tool presented in \ref{sec:statistical_similarity}.\\
+
+The computation of such matrices cost around 20 seconds for 15 tags on the machine presented in \ref{sec:computer_characteristics}.
+% subsection matrices_exports (end)
+
+\subsection{Graph-based experiments} % (fold)
+\label{sub:graph_based_experiments}
+The two first experiments, WholeList (short WL) and SubLists (short SL), are based on the same algorithm of candidates detection. This algorithm make use of Breadth-First search (BFS) traversers in order to browse the graph starting from the initial tags' nodes. The BFS implementation is available on Code \ref{code:bfs} and the candidates detection algorithm on Code \ref{code:newtags}.\\
+\lstinputlisting[language=Java,caption=Java BFS implementation,float,label={code:bfs}]{./Primitives/BFS.java}
+\lstinputlisting[language=Java,caption=Candidates detection algorithm,float,label={code:newtags}]{./Primitives/newTags.java}
+\subsubsection{Lists - WL} % (fold)
+\label{ssub:lists_wl}
+The difference between WL and SL is located line 26 of Code \ref{code:newtags} : the score computation function doesn't take the same things into account. Let's detail this.\\
+In the WL experiment, we compute a global score using all the initial tags (Whole List). This global score is composed of all the scores between the considered candidate and the initial nodes as follows :
+\begin{equation}
+\label{eq:wholeList}
+globalScore(currentNode) = \sum_{0\le n< nbNodes} \frac{1}{score(currentNode, nodes(n))^k}
+\end{equation}
+The $score$ function can be one of the measures we presented in \ref{chapter:Measures}. Due to computer performances we had to go with the Shortest Path distance. $k$ is a chosen integer which has for consequence to favor (or not) really close nodes.
+% subsubsection lists_wl (end)
+\subsubsection{Lists - SL} % (fold)
+\label{ssub:lists_sl}
+The SL experiment is based on the same approach than his brother WL. The difference is that, when it comes to global score computing, we only take into account a determined number of initial nodes. This results on a small modification of the algorithm : before any global score calculation we store all the $score$ results and only use some of them in equation \eqref{eq:wholeList}. This has for consequence that the very far nodes don't pollute our results by inserting noise. 
+% subsubsection lists_sl (end)\subsubsection{Direct Neighbors}
+\subsubsection{Direct Neighbors} % (fold)
+\label{ssub:direct_neighbors}
+This last graph-based experiment version is more direct : we search for direct neighbors of the input nodes. In concrete terms, for each of the input nodes, we store all the parents nodes with a maximal distance of 2. We count how many times each parent is found and return the most frequent ones. This method is expected to give good results when the initial tags are close semantically speaking (boat, sea, sail \dots) but can return abstract results in the case of a very diverse set of tags, and even more if this set is small.
+% subsubsection direct_neighbors (end)
+% subsection graph_based_experiments (end)
+\subsection{Plain-text experiments} % (fold)
+\label{sub:plain_text_experiments}
+We will now present the last two experiments which are directly based on the content of Wikipedia's pages, extracted with the help of the JSoup library (see \ref{sub:jsoup}). The process is basically the same : we search for wikipedia's pages matching the URL \emph{https://en.wikipedia.org/wiki/+TAG}, if found we extract the content from the first paragraph and then operate the candidate detection step.
+\subsubsection{WikiLinks} % (fold)
+\label{ssub:wikilinks}
+For the WikiLinks experiment, we only care about internal links (called wikilinks). We access them using CSS queries :
+\begin{itemize}
+	\item Access the 1st paragraph : \emph{div\#mw-content-text $>$ p}
+	\item Access wikilinks : \emph{a[href~=/wiki/(?!Help:)(?!File:)(?!Wikipedia:)]}
+\end{itemize}
+Here again, we store each of the links and sum its occurrences, we then propose as final candidates the most frequent ones.
+% subsubsection wikilinks (end)
+\subsubsection{WikiContent} % (fold)
+\label{ssub:wikicontent}
+The WikiContent experiment is very similar to the WikiLinks one. The difference is that we consider here all the nouns in the first paragraph of the Wikipedia's page. In order to achieve this, we extract the first paragraph with the same CSS query presented above and then parse its content using the NLP library. The Part-of-speech module gives us a list of tokens as well as their POS label (see below for the complete list of POS labels) and we then only keep the nouns (NN* labels : common and proper nouns, singular and plural).\\
+Here again, we store each of the links and sum its occurrences, we then propose as final candidates the most frequent ones.
+\begin{multicols}{2}
+\begin{itemize}
+  \item CC Coordinating conjunction
+  \item CD Cardinal number
+  \item DT Determiner
+  \item EX Existential there
+  \item FW Foreign word
+  \item IN Preposition or subordinating conjunction
+  \item JJ Adjective
+  \item JJR Adjective, comparative
+  \item JJS Adjective, superlative
+  \item LS List item marker
+  \item MD Modal
+  \item NN Noun, singular or mass
+  \item NNS Noun, plural
+  \item NNP Proper noun, singular
+  \item NNPS Proper noun, plural
+  \item PDT Predeterminer
+  \item POS Possessive ending
+  \item PRP Personal pronoun
+  \item PRP\$ Possessive pronoun
+  \item RB Adverb
+  \item RBR Adverb, comparative
+  \item RBS Adverb, superlative
+  \item RP Particle
+  \item SYM Symbol
+  \item TO to
+  \item UH Interjection
+  \item VB Verb, base form
+  \item VBD Verb, past tense
+  \item VBG Verb, gerund or present participle
+  \item VBN Verb, past participle
+  \item VBP Verb, non 3rd person singular present
+  \item VBZ Verb, 3rd person singular present
+  \item WDT Whdeterminer
+  \item WP Whpronoun
+  \item WP\$ Possessive whpronoun
+  \item WRB Whadverb
+\end{itemize}
+\end{multicols}
+% subsubsection wikicontent (end)
+% subsection plain_text_experiments (end)
 
 \section{Results and Analysis}
 
 \subsection{Evaluation methodology}
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam ultricies lacinia euismod. Nam tempus risus in dolor rhoncus in interdum enim tincidunt. Donec vel nunc neque. In condimentum ullamcorper quam non consequat. Fusce sagittis tempor feugiat. Fusce magna erat, molestie eu convallis ut, tempus sed arcu. Quisque molestie, ante a tincidunt ullamcorper, sapien enim dignissim lacus, in semper nibh erat lobortis purus. Integer dapibus ligula ac risus convallis pellentesque.
 
-\subsection{Graph-based experiments} % (fold)
-\label{sub:graph_based_experiments}
-\subsubsection{Direct Neighbors}
-\subsubsection{Lists - WL}
-\subsubsection{Lists - SL}
 
-% subsection graph_based_experiments (end)
-
-\subsection{Plain-text experiments}
-\subsubsection{WikiLinks}
-\subsubsection{WikiContent}
