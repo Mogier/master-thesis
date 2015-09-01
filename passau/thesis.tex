@@ -31,6 +31,7 @@
 
 \usepackage[square, numbers, comma, sort&compress]{natbib} % Use the natbib reference package - read up on this to edit the reference style; if you want text (e.g. Smith et al., 2012) for the in-text references (instead of numbers), remove 'numbers' 
 \usepackage{dirtytalk, cleveref,listings, color, graphicx,pxfonts,amsmath}
+\usepackage{multicol}
 \hypersetup{urlcolor=black, colorlinks=true} % Colors hyperlinks in blue - change to black if annoying
 \title{\ttitle} % Defines the thesis title - don't touch this
 
@@ -67,6 +68,10 @@
   commentstyle=\color{gray}\upshape
 }
 
+\lstdefinelanguage{SQL}{
+  morekeywords={MATCH, SELECT, FROM, WHERE, RETURN, AND, COUNT}
+}
+
 \lstdefinelanguage{SPARQL}{
 	morekeywords={PREFIX, SELECT, WHERE, FILTER, OPTIONAL, DISTINCT}
 }
@@ -100,6 +105,7 @@
 
 \newcommand{\HRule}{\rule{\linewidth}{0.5mm}} % New command to make the lines in the title page
 \renewcommand{\lstlistingname}{Code}
+\renewcommand\lstlistlistingname{List of Codes}
 
 \setcounter{tocdepth}{3}
 

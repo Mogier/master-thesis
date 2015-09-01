@@ -5,14 +5,80 @@
 \label{chapter:Experiments} % Change X to a consecutive number; for referencing this chapter elsewhere, use \ref{ChapterX}
 
 \lhead{Chapter 10 \emph{Experiments}} % Change X to a consecutive number; this is for the header on each page - perhaps a shortened title
-
-%----------------------------------------------------------------------------------------
-%	SECTION 1
-%----------------------------------------------------------------------------------------
+As previously said, we implemented five experiments : three are based on our graph structure and two directly use the content of Wikipedia's pages. We will now present the dataset we used, the experiments' implementation, the results we obtained and discuss them.
 
 \section{Dataset} % (fold)
 \label{sec:dataset}
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam ultricies lacinia euismod. Nam tempus risus in dolor rhoncus in interdum enim tincidunt. Donec vel nunc neque. In condimentum ullamcorper quam non consequat. Fusce sagittis tempor feugiat. Fusce magna erat, molestie eu convallis ut, tempus sed arcu. Quisque molestie, ante a tincidunt ullamcorper, sapien enim dignissim lacus, in semper nibh erat lobortis purus. Integer dapibus ligula ac risus convallis pellentesque.
+Our experiments have been made using a database of images pulled out the website Flickr\footnote{https://www.flickr.com/} by fellow students\footnote{Thanks to Adela Neacsu, Sorana Capalnean, Iler Viraragavane and Gaëtan Deshayes}. Some statistics about the database are presented in Table \ref{table:db_stats}.\\
+\begin{table}[!h]
+\centering
+\begin{tabular}{|c|c|c|}
+\hline
+{\bf Nb. of images} & {\bf Distinct unique tags} & {\bf Avg. nb. of initial tags} \\ \hline
+55600               & 10261                      & 17.69                          \\ \hline
+\end{tabular}
+\caption{Database statistics}
+\label{table:db_stats}
+\end{table}
+
+\newpage
+
+The top 20 used tags are also available below.
+\begin{multicols}{2}
+\begin{enumerate}
+  \item photography : 55002
+  \item colour image : 49734
+  \item outdoors : 49129
+  \item no people : 44892
+  \item day : 37337
+  \item sky : 23964
+  \item travel destinations : 17713
+  \item cloud : 16906
+  \item tree : 12890
+  \item scenics : 12134
+  \item tranquility : 11668
+  \item tranquil scene : 10526
+  \item landscape : 10303
+  \item building exterior : 9941
+  \item beauty in nature : 9686
+  \item people : 8198
+  \item sea : 8197
+  \item capital cities : 8144
+  \item close-up : 8083
+  \item reflection : 7393
+\end{enumerate}
+\end{multicols}
+
+For the purpose of our tests, we created a graph based on 1350 images that are located around Berlin (Germany). The PostgreSQL query is available in Code \ref{code:berlin}.
+\lstinputlisting[language=SQL,caption=PostgreSQL query to retrieve images around Berlin,label={code:berlin}]{./Primitives/berlinImages.sql}
+
+This gave us a graph which contains 5212 nodes and 7543 relations, their distributions are presented in Tables \ref{table:nodes} and \ref{table:edges}. An example of a Cypher query counting the WordNet's nodes is also presented in Code \ref{code:cypherWordNet}.\\
+
+\begin{table}[!h]
+\centering
+\begin{tabular}{|c|c|c|c|}
+\hline
+{\bf Virtual} & {\bf Base} & {\bf WordNet} & {\bf DBpedia} \\ \hline
+2             & 1619       & 2613          & 978           \\ \hline
+\end{tabular}
+\caption{Nodes' types distribution}
+\label{table:nodes}
+\end{table}
+
+\begin{table}[!h]
+\centering
+\begin{tabular}{|c|c|c|}
+\hline
+{\bf VIRTUAL} & {\bf PARENT} & {\bf EQUIV} \\ \hline
+1612          & 3592         & 2339      \\ \hline
+\end{tabular}
+\caption{Edges' types distribution}
+\label{table:edges}
+\end{table}
+
+\lstinputlisting[language=SQL,caption=Cypher query to count WordNet's nodes,label={code:cypherWordNet}]{./Primitives/wordNetCypher.sql}
+
+Thanks to the Gephi software\footnote{http://gephi.github.io/}, we were able to compute some statistics about our network and we learned that the longest shortest path between two nodes (also called graph's diameter) of our graph is of 20 and the average path length between two nodes is of 6.64.
 
 % section dataset (end)
 

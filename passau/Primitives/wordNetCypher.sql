@@ -1,0 +1,1 @@
+MATCH (w:Concept) WHERE w.uri=~"Wordnet:.*" RETURN COUNT(w)
