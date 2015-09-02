@@ -1,0 +1,15 @@
+%!TEX root = ../thesis.tex
+
+\chapter{Future Work} % Main chapter title
+
+\label{chapter:FutureWork} % Change X to a consecutive number; for referencing this chapter elsewhere, use \ref{ChapterX}
+
+\lhead{Chapter 11. \emph{Future Work}} % Change X to a consecutive number; this is for the header on each page - perhaps a shortened title
+
+Our experiments show promising results but it is important to notice that we only propose candidates that have a higher level of abstraction than our initial tags. Therefore, human-beings tend not to give the best mark to these abstract candidates.\\
+
+This is explain by the fact that we "climb" the graph and never travel in the other direction. This can be a way to improve this work : given "general" candidates, it might be interesting to search in their specializations for good tags. However, we can't be sure that these specializations will describe the image (unlike the generalizations). One will then need a way to "validate" then discovered candidates. Here, mixing the semantic enrichment with the use of low-level features can be a good idea.\\
+
+New resources could also be added to this work, like Geonames (see \ref{sub:geonames}) for instance which provides nice services to detect geographic entities.\\
+
+It might also be interesting to use other similarities measures, we were limited to the use of the Shortest Path length due to machine's performances.

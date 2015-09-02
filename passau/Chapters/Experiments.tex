@@ -189,9 +189,72 @@ Here again, we store each of the links and sum its occurrences, we then propose 
 % subsubsection wikicontent (end)
 % subsection plain_text_experiments (end)
 
-\section{Results and Analysis}
+\section{Results and Analysis} % (fold)
+\label{sec:results_and_analysis}
+\subsection{Evaluation methodology} % (fold)
+\label{sub:evaluation_methodology}
+Now that we have presented our experiments, we will explain how we evaluated them using two different methods.\\
 
-\subsection{Evaluation methodology}
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam ultricies lacinia euismod. Nam tempus risus in dolor rhoncus in interdum enim tincidunt. Donec vel nunc neque. In condimentum ullamcorper quam non consequat. Fusce sagittis tempor feugiat. Fusce magna erat, molestie eu convallis ut, tempus sed arcu. Quisque molestie, ante a tincidunt ullamcorper, sapien enim dignissim lacus, in semper nibh erat lobortis purus. Integer dapibus ligula ac risus convallis pellentesque.
+The first one only applies to the three graph-based experiments : we were able to compute a distance metric between a removed percentage (30\%) of the initial tags and the candidates. This distance is based on the Shortest Path metric and take all kinds and directions of edges into account.\\
 
+The second method is an user-based evaluation, we asked several individuals to rate the generated candidates regarding the image and the initial tags.\\
 
+% subsection evaluation_methodology (end)
+
+\subsection{Evaluation results} % (fold)
+\label{sub:evaluation_results}
+\subsubsection{Semantic distance average} % (fold)
+\label{ssub:semantic_distance_average}
+We ran our tests on 100 images among those used to create our graph. All of the chosen considered images has a minimum set of initial tags of at least 7 items. The three experiments (WL, SL and DN) were used on each image and we computed the distance metric for each of them. Eventually, we calculated the average distance for each experiment. The results are presented in Table \ref{table:avgDist}.\\
+\begin{table}[!h]
+\centering
+\begin{tabular}{ccc}
+\cline{1-3}
+\multicolumn{1}{|c|}{{\bf WholeList}} & \multicolumn{1}{c|}{{\bf Sub-Lists}} & \multicolumn{1}{c|}{{\bf Direct Neighbors}} \\ \cline{1-3}
+\multicolumn{1}{|c|}{3.95}     & \multicolumn{1}{c|}{3.90}     & \multicolumn{1}{c|}{3.55} \\ \cline{1-3}
+\end{tabular}
+\caption{Average distance between removed tags and candidates}
+\label{table:avgDist}
+\end{table}
+
+We observe that the DN experiment has better results than the list-based ones. These are really close and this can be explained by the fact that their candidates are often the same but in a different order. These results are pretty good since our diameter (ie the longest shortest path between two nodes in our graph) is of 20. The EQUIV edges are certainly helping these results : without them, the shortest path between a base node which only has generalizations in the WordNet's ontology and one which only has its in the DBpedia's ontology would inevitably contain the virtual root node. This would make the distances way more longer.\\
+
+The computation of these results cost around 1.5 hour for 100 images.
+% subsubsection semantic_distance_average (end)
+\subsubsection{User evaluation} % (fold)
+\label{ssub:user_evaluation}
+For this method, we also used 100 images with a minimum amount of initial tags of 7, ran all experiments for each image and stored all the results. Then we generated lots with the following rules :
+\begin{itemize}
+  \item Each lot only concern one type of test (WL, SL, DN, WikiLinks or WikiContent)
+  \item Each lot contains the chosen test's results for 5 images
+  \item Each test is evaluated by several people
+  \item Each lot is sent to several people
+\end{itemize}
+
+The next step was to send the lots to our testers. They were mainly engineering students from INSA Lyon but only 27\% of them study computer science. They were given a HTML file with 5 images to evaluate (see Figure \ref{fig:userEval} for an example of one) and a CSV file to write their evaluation. The question they had to answer was \emph{Does this tag describe the image ?} and they had to rate each tag on a scale of 1 (\emph{Strongly Agree}) to 5 (\emph{Strongly Disagree}) with an \emph{Undecided} option (3). As already said, each person only evaluated one experiment (WL, SL, DN, WikiLinks or WikiContent) and each experiment was evaluated by different people. We concatenated the results and computed several statistics presented in Table \ref{table:userEval}.\\
+
+\begin{figure}
+  \includegraphics[scale=0.6]{./Primitives/exampleEval}
+  \caption{User-evaluation sample}
+  \label{fig:userEval}
+\end{figure}
+
+\begin{table}[!h]
+\centering
+\begin{tabular}{|l|c|c|c|c|c|}
+\hline
+{\bf } & {\bf WL} & {\bf SL} & {\bf DN} & {\bf WikiLinks} & {\bf WikiContent} \\ \hline
+{\bf Avg.  global rating} & 3.30 & 3.29 & 3.09 & 3.25 & 2.55 \\ \hline
+{\bf Avg. 1st candidate rating} & 2.70 & 2.33 & 2.73 & 3.13 & 1.93 \\ \hline
+{\bf Avg. 2nd candidate rating} & 3.45 & 2.96 & 3.6 & 2.67 & 2.19 \\ \hline
+{\bf Avg. 3rd candidate rating}  & 3.15 & 3.33 & 3.13 & 2.53 & 2.82 \\ \hline
+\end{tabular}
+\caption{User-evaluation results}
+\label{table:userEval}
+\end{table}
+
+These results are interesting, it is very clear that the WikiContent experiment is the best and among the graph-based ones, the DN experiment seems to be the more promising. We also wanted to see if the theory in which the firsts tags are the better ones was correct, and we can't really conclude anything based on these results since no rule seems to apply (only SL and WikiContent follow this pattern). However, it is nice to see that the first tag is almost always the best tag (only WikiLinks refute this). In average, the global rating is around 3, which isn't bad but isn't so good as well. More has to be done in order to enhance our prototype and perspectives are presented in the next chapter.
+
+% subsubsection user_evaluation (end)
+% subsection evaluation_results (end)
+% section results_and_analysis (end)
