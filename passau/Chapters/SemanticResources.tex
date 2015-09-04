@@ -32,9 +32,9 @@ Given those basic notions, we will now further detail four semantic web resource
 
 DBpedia\footnote{http://wiki.dbpedia.org/} is a project originally launched by two German universities (Berlin and Leipzig) and backed by an important community. It explores Wikipedia\footnote{https://en.wikipedia.org/} and extract information from it which results on the creation of a multilingual, large-scale knowledge base. The extraction framework, all the available end-points as well as some facts and figures about the project are presented in \cite{lehmann2014dbpedia}.\\
 
-DBpedia's ontology is based on classes (320 items) which form a subsumption hierarchy, the root element being owl:Thing, with a maximal depth of 5\footnote{Complete classes tree : http://mappings.dbpedia.org/server/ontology/classes/}. Theses classes are described by a total of 1650 different properties, forming a large set of RDF triples (580 million extracted from the English version of Wikipedia).\\
+DBpedia's ontology is based on classes (320 items) which form a subsumption hierarchy, the root element being \emph{owl:Thing}, with a maximal depth of 5\footnote{Complete classes tree : http://mappings.dbpedia.org/server/ontology/classes/}. Theses classes are described by a total of 1650 different properties, forming a large set of RDF triples (580 million extracted from the English version of Wikipedia).\\
 
-Even though DBpedia is now a worldwide project and provides pages in 125 languages, the English one is still the most represented. We can indeed find 4.58 million of things\footnote{http://wiki.dbpedia.org/about/facts-figures} including 1,445,000 instances of the class \textit{Person}, 735,000 places \textit{Place}, 251,000 \textit{Species} \dots The number of instances described in this language is about three time larger than the second and third language (French and German). \\
+Even though DBpedia is now a worldwide project and provides pages in 125 languages, the English one is still the most represented. We can indeed find 4.58 million of things\footnote{http://wiki.dbpedia.org/about/facts-figures} including 1,445,000 instances of the class \textit{Person}, 735,000 \textit{Place}, 251,000 \textit{Species} \dots The number of instances described in this language is about three time larger than the second and third language (French and German). \\
 
 As well as any RDF-structured dataset, DBpedia can be requesting with SPARQL (which is an recursive acronym : SPARQL Protocol and RDF Query Language) queries. SPARQL allows the user to search, add, modify or delete RDF data available on the Internet, see \cite{prud2008sparql} for more details about the language. \\
 
@@ -48,7 +48,7 @@ As well as any RDF-structured dataset, DBpedia can be requesting with SPARQL (wh
 	label={code:findSuperClass}]
 	{./Primitives/findSuperClass.sparql}
 
-Codes \ref{code:findClass} and \ref{code:findSuperClass} present two simple and generic SPARQL search queries wich return respectively the class(es) of a given entity E and the superclass(es) of a given class C using the \textit{type} and \textit{subClassOf} predicates.\\
+Codes \ref{code:findClass} and \ref{code:findSuperClass} present two simple and generic SPARQL search queries which return respectively the class(es) of a given entity E and the superclass(es) of a given class C using the \textit{type} and \textit{subClassOf} predicates.\\
 
 DBpedia also provides useful web services and HTTP endpoints. DBpedia Spotlight, which highlight DBpedia concepts in an input text is described in \cite{mendes2011dbpedia} and further details about disambiguation using this service are presented in subsection \ref{sec:dbpedia_spotlight}. The official DBpedia SPARQL endpoint\footnote{http://dbpedia.org/sparql} allows the user to send SPARQL queries to the online Virtuoso Triple Store by using the browser interface or by sending a HTPP request. We learn in \cite{lehmann2014dbpedia} that the average amount of hits per day of this endpoint is of 2,910,410 for the 3.8 dataset version. \\
 
@@ -61,16 +61,17 @@ We find lot of papers in the literature which mention DBpedia as an asset for sy
 GeoNames\footnote{http://www.geonames.org/} is a geographical database which contains over 10 million geographical names. The most documented countries\footnote{http://www.geonames.org/statistics/} are the United States of America (2,203,094 names), Norway (600,008) and China (526,456). All resources are categorized into one out of nine classes and further subcategorized into one out of 645 codes\footnote{http://www.geonames.org/export/codes.html}. Obviously, the root element of Geonames' hierarchy is mother earth.\\
 
 Like DBpedia, the Geonames' ontology makes possible the addition of new resources to the World Wide Web. However, Geonames distinguish the feature's Concept from the RDF document about it. In consequence, each feature possesses two representation in Geonames. See the two following URIs as example :
-\begin{description}
-\item[URI1] http://sws.geonames.org/8015555/
-\item[URI2] http://sws.geonames.org/8015555/about.rdf
-\end{description}
+\begin{itemize}
+\item URI1 : http://sws.geonames.org/8015555/
+\item URI2 : http://sws.geonames.org/8015555/about.rdf
+\end{itemize}
 The first one stands for the \say{Notre Dame de Fourvière} church in Lyon, France. This URI is used when one wants to refers to the church itself. The second URI is the RDF document with what Geonames knows about the church, its latitude and longitude for instance, or some nearby locations.\\
 
-In order to allow the user to browse its \emph{Tremendous set of data} (Sir T. Berners-Lee), Geonames proposes a lot of REST-based web-services. In the case of image annotation, one in particular could be useful. Given that lot of recent numeric images contain EXIF data which embed GPS information such as the longitude and the latitude (see \cite{tevsic2005metadata} for further details about the EXIF format), one could add geographic tags to the picture with the help of the \textit{findNearbyPlaceName} service. Here is an example of usage :\\
+In order to allow the user to browse its \emph{Tremendous set of data} (Sir T. Berners-Lee), Geonames proposes a lot of REST-based web-services. In the case of image annotation, one in particular could be useful. Given that lot of recent numeric images contain EXIF data which embed GPS information such as the longitude and the latitude (see \cite{tevsic2005metadata} for further details about the EXIF format), one could add geographic tags to the picture with the help of the \textit{findNearbyPlaceName} service. Here is an example of usage, the response is display in Code \ref{code:passauXML}.\\
 \underline{Query} : findNearbyPlaceName?lat=48.566\&lng=13.43\&username=demo 
 \lstinputlisting[language=XML,
 	caption=Geonames' XML response,
+	float,
 	label={code:passauXML}]
 	{./Primitives/passau.xml}
 
@@ -82,9 +83,9 @@ Given its specific domain, we found less use-cases of Geonames in the literature
 
 WordNet\footnote{https://wordnet.princeton.edu/} is a lexical database of English which has been presented for the first time in 1995 in \cite{miller1995wordnet}. It is hosted by the Princeton University, currently running version 3.1 but there are no current plan for a future release due to limited staffing.\\
 
-Its structure is based on the concept of \say{synset} (synonym set), a set cognitive synonyms. WordNet distinguish among Types (common nouns, verbs\dots) and Instances (specific persons\dots). Synsets are interliked using conceptual, semantic and lexical relations. The hierarchy is built by the use of the super-subordinate relation (or hyperonymy, hyponymy in WordNet's jargon). These relations implements the two directions of the \say{IS-A} expression. For instance, \textit{fruit} is \textbf{hyperonym} of \textit{apple} and \textit{horse} is a \textbf{hyponym} of \textit{animal}, the root element being \say{entity}. Other relations are also provided, like the antonymy (opposite of synonymy) or the meronymy and its opposite holonymy which implements the \say{IS-PART-OF} relation : \textit{finger} is a \textbf{meronym} of \textit{hand}. All these relations are transitive.\\
+Its structure is based on the concept of \say{synset} (synonym set), a set cognitive synonyms. WordNet distinguish among Types (common nouns, verbs\dots) and Instances (specific persons\dots). Synsets are interlinked using conceptual, semantic and lexical relations. The hierarchy is built by the use of the super-subordinate relation (or hyperonymy, hyponymy in WordNet's jargon). These relations implements the two directions of the \say{IS-A} expression. For instance, \textit{fruit} is \textbf{hyperonym} of \textit{apple} and \textit{horse} is a \textbf{hyponym} of \textit{animal}, the root element being \say{entity}. Other relations are also provided, like the antonymy (opposite of synonymy) or the meronymy and its opposite holonymy which implements the \say{IS-PART-OF} relation : \textit{finger} is a \textbf{meronym} of \textit{hand}. All these relations are transitive.\\
 
-This resource is useful if we are searching for entities. Since the maximal depth is of the ontology is of 16, the leafs are very detailed nous (tsetse-fly, Yukon white birch, \dots) but it also contains more general concepts (vehicle, animal, \dots). WordNet contains at the moment 155,287 unique strings incuding 117,798 nouns.\\ 
+This resource is useful if we are searching for entities. Since the maximal depth is of the ontology is of 16, the leafs are very detailed nouns (tsetse-fly, Yukon white birch, \dots) but it also contains more general concepts (vehicle, animal, \dots). WordNet contains at the moment 155,287 unique strings incuding 117,798 nouns.\\ 
 
 It exists several ways to browse this resource. An online interface allows the user to manually query the dataset and to navigate in it through hyperlinks. For software and research purposes, the user has to download one of the released version of WordNet's dataset as well as a specific library according to the code language he's using.\\
 

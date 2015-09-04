@@ -22,7 +22,7 @@ In order to filter the irrelevant ones, they then compute several semantic simil
 \end{enumerate}
 Finally, they combine these metrics using Dempster-Shafer Theory (\cite{shafer1976mathematical}) and the keywords with a resulting score under a chosen threshold are removed. Detailed method steps are presented in the original paper. \\
 
-Concerning their results, they compare their \emph{TMHD} proposed approach with a basic TM process. Based on a set of most frequently used keywords, they found that, on average, precisions values of TM and TMHD are respectively 14.21\% and 33.11\%. This indicates that TMHD is 56.87\% better than TM. It is interesting to note that the recall score stays the same due to the fact that only irrelevant keywords are removed. They also compare \emph{TMHD} to the use of individual measures with TM and the results aren't as good as those from their combination.\\
+Concerning their results, they compare their \emph{TMHD} proposed approach with a basic TM process. Based on a set of most frequently used keywords, they found that, in average, precisions values of TM and TMHD are respectively 14.21\% and 33.11\%. This indicates that TMHD is 56.87\% better than TM. It is interesting to note that the recall score stays the same due to the fact that only irrelevant keywords are removed. They also compare \emph{TMHD} to the use of individual measures with TM and the results aren't as good as those from their combination.\\
 These results show the power of knowledge-based data and similarity measures when it's added to a statistical model.
 % section mixing_statistics_and_wordnet (end)
 
@@ -43,6 +43,7 @@ Folksonomies are typical Web 2.0 systems that allow users to upload, tag and sha
 	\item Relation discovery
 \end{itemize}
 The first step is achieved by extracting concepts from online ontologies in which the local concept label matches the tag. In order to exploit all meanings, the authors retrieve all the potential semantic terms for each tag and then discover relation between them in the second phase. This means that no disambiguation is processed but it is a consequence of the relation discovery phase.\\
+
 This phase consist of the identification of the relation between two tags \emph{T1} and \emph{T2}. Four kind of relations are distinguished :
 \begin{itemize}
 	\item Subsumption relation : \emph{T1} subClassOf \emph{T2}

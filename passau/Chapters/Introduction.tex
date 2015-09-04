@@ -19,7 +19,7 @@ In the all days life, people share their pictures on social networks in less tha
 Companies also produce a lot of media data. Industry companies need their products' pictures, marketing and advertising studios use a lot of images in order to create new stuff for their client, \dots But the most consumer of media data are obviously mass media themselves : Newspapers, TV shows, news broadcasts are dealing with pictures at every moment of their day.\\
 
 This huge production and consumption of images implies the need of an efficient way to store and search for the relevant one when the time comes. The best illustration to this need is to think of the nice but long moments one had with its relatives searching for the good picture of the new-born nephew in the family pictures album.\\
-Since an image itself doesn't have a natural plain-text representation the best way to describe it is to add meta-data (data about the data) such as its date of creation, its dimensions or, and this is what this thesis is about, some tags.\\
+Since an image itself doesn't have a natural plain-text representation, the best way to describe it is to add meta-data (data about the data) such as its date of creation, its dimensions or, and this is what this thesis is about, some descriptives tags.\\
 
 There are a lot of ways if one wants to annotate pictures. We can do it manually, using our own words (like \say{Dad}, \say{Home} \dots), we can also analyze the raw picture, its pixel representation and compare some metrics (like the color histogram) to sample images in order to detect known concepts. Moreover, if the image already possesses annotations, we can enrich it semantically. \\
 
@@ -36,7 +36,7 @@ In the following section, we will present and discuss an application scenario to
 \section{Motivation} % (fold)
 \label{sec:motivation}
 
-NewsTV is a famous TV news channel which runs 24/7 and only speaks about the current news. It has lot of reporters worldwide, covering the important local news and sending their production to the main site in Paris, France.\\
+NewsTV is a famous TV news channel which runs 24/7 and only speaks about the current news. It employs a lot of reporters worldwide, covering the important local news and sending their production to the main site in Paris, France.\\
 
 The employees often need to consult older coverages in order to explain the context of the news, to make the necrology of a famous actor who recently died or to re-use common shots. 
 Therefore, they need to query the central multimedia database management system using keywords they are familiar with like \say{Elections, France, 2007, José Bové}. But sometimes, their research aren't so specific and they are looking for more generic pictures, let say \say{Land, Tree, Animal}.\\
@@ -66,7 +66,7 @@ The remainder of this thesis will be organized as follows :
 \item\textbf{Chapter~\ref{chapter:ExistingServices} - Existing Approaches :} describes existing image annotation approaches as well as their architecture.
 \item\textbf{Chapter~\ref{chapter:SotAConclusion} - State of the Art Conclusion :} summarizes the findings of the previous state of the art and opens the way to the presented contribution.
 \item\textbf{Chapter~\ref{chapter:Methodology} - Proposed Methodology :} presents the chosen methodology as well as some organizational points.
-\item\textbf{Chapter~\ref{chapter:Architecture} - Proposed Architecture :} details the technological and the chosen DBMS schema. Illustration figures will be presented.
+\item\textbf{Chapter~\ref{chapter:Architecture} - Proposed Architecture :} details the technological choices and the chosen DBMS schema. Illustration figures will be presented.
 \item\textbf{Chapter~\ref{chapter:Experiments} - Experiments :} presents the chosen dataset, details some of the main algorithms and reviews the tests' results with the use of different evaluation methods.
 \item\textbf{Chapter~\ref{chapter:FutureWork} - Future Work :} highlights possible directions for future research problems.
 \item\textbf{Chapter~\ref{chapter:ContributionConclusion} - Contribution Conclusion :} summarizes the findings of the presented research problem.

@@ -18,7 +18,7 @@ Let's consider the following sentences :
 	\item The \textit{bass} line is too weak, we need to work on that !
 	\item I bought some grilled \textit{bass} on the way home.
 \end{enumerate}
-For the human brain, it's obvious that the first one refers to the musical context and the second to a special kind of fish. However, developing algorithms that replicate the this ability is often a difficult task. If we go further, it might be even more difficult to detect the precise meaning of \textit{bass} in the first utterance since, in the musical context, it has two senses : the instrument and the sound.\\
+For the human brain, it's obvious that the first one refers to the musical context and the second to a special kind of fish. However, developing algorithms that replicate this ability is often a difficult task. If we go further, it might be even more difficult to detect the precise meaning of \textit{bass} in the first utterance since, in the musical context, it has two senses : the instrument and the sound.\\
 
 In \cite{ide1998introduction}, Ide and Veronis present a nice state of the art of the disambiguation process. They explain that it takes two main steps :
 \begin{enumerate}
@@ -27,6 +27,7 @@ In \cite{ide1998introduction}, Ide and Veronis present a nice state of the art o
 \end{enumerate} 
 Regarding step 1, \textit{senses} can be pulled out different resources like our everyday dictionaries, groups of features (e.g synsets in WordNet, see \ref{sub:wordnet}) or transfer dictionaries, including translation in another language.\\
 Step 2 is accomplished by reliance on two sources of information. The first one, already mentioned, is the \textit{context} of the word which include information contained in the text in which the word appears and can also be filled by some extra-linguistic information about the text such as a situation. The second one is the external knowledge sources which can be used, such as encyclopedic resources, hand-made knowledge resources \dots\\
+
 The authors then review all the WSD methods currently in use, see their paper for more information on the topic as well as the issues and problematic it rise.
 % section how_does_it_work (end)
 
@@ -36,7 +37,7 @@ Here we will jump from theory to reality and study how the DBpedia Spotlight\foo
 
 Before the disambiguation step, DBpedia Spotlight's algorithm detect entity names (or \textit{surface forms} and pre-rank them with the use of the DBpedia Lexicalization dataset\footnote{http://wiki.dbpedia.org/lexicalizations}. They add an important note : selecting fewer candidates can be good in terms of time cost but can also reduce recall if performed to aggressively.\\
 
-After this selection phase, it use the context around the surface form (paragraphs) as information to find the appropriate disambiguation. DBpedia resources are modeled in a way that each resource is a point in a multidimensional space of words. They illustrate this process saying that this can be seen as an aggregation of all Wikipedia's paragraph mentioning the concept. Some metrics are computed :
+After this selection phase, it uses the context around the surface form (paragraphs) as information to find the appropriate disambiguation. DBpedia resources are modeled in a way that each resource is a point in a multidimensional space of words. They illustrate this process saying that this can be seen as an aggregation of all Wikipedia's paragraph mentioning the concept. Some metrics are computed :
 \begin{itemize}
 	\item Term Frequency (TF) weight : represent the relevance of a word for a given resource
 	\item Inverse Document Frequency (IDF) weight : represent the general importance of the word in the collection of DBpedia's resources
